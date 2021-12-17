@@ -119,13 +119,17 @@ class Cloudflare:
 
         return True
 
-    def export_rule(self, domain_name, rule_name):
+    def export_rule(self, domain_name, rule_name, custom_name=None):
         """Export the expression of a rule in a txt file"""
 
         rule = self.get_rule(domain_name, rule_name)
+        if custom_name:
+            rule_name = custom_name
+        else:
+            rule_name = rule["description"]
         rule_expression = self.beautify(rule["filter"]["expression"])
 
-        self.utils.write_expression(rule["description"], rule_expression)
+        self.utils.write_expression(custom_name, rule_expression)
 
         return True
 
@@ -148,7 +152,7 @@ class Cloudflare:
 
         return self.error.handle(r.json(), ["success"])
 
-    def update_rule(self, domain_name, rule_name, rule_file, action="block"):
+    def update_rule(self, domain_name, rule_name, rule_file):
         """Update a rule with a specific expression"""
 
         zone = self.get_domain(domain_name)
@@ -168,7 +172,7 @@ class Cloudflare:
 
         return self.error.handle(r.json(), ["success"])
 
-    def import_rules(self, domain_name, action="block"):
+    def import_rules(self, domain_name, actions_all="block"):
         """Import all expressions from all txt file"""
 
         files = os.listdir(self.utils.directory)
@@ -184,7 +188,7 @@ class Cloudflare:
                 if not name in rules:
                     if self.active_rules < self.rules:
                         print("Creating rule:", name)
-                        self.create_rule(domain_name, name, name, action)
+                        self.create_rule(domain_name, name, name, actions_all)
                         self.active_rules += 1
                     else:
                         print("Cannot create more rules ({} used / {} available)".format(self.active_rules, self.rules))
