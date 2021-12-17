@@ -1,7 +1,7 @@
 import requests, os
 
 class Cloudflare:
-    def __init__(self, email, key):
+    def __init__(self, email, key, folder=None):
         """Generate a specific token through cloudflare profile
         https://dash.cloudflare.com/profile/api-tokens
         * email -> Email account
@@ -14,7 +14,7 @@ class Cloudflare:
             "Content-Type": "application/json"
         }
 
-        self.utils = Utils()
+        self.utils = Utils(folder)
         self.error = Error()
 
         self.plan = "free"
@@ -201,8 +201,8 @@ class Cloudflare:
 
 
 class Utils:
-    def __init__(self, directory="expressions"):
-        self.directory = directory
+    def __init__(self, directory=None):
+        self.directory = directory if directory else "expressions"
 
         if not os.path.isdir(self.directory):
             os.mkdir(self.directory)
