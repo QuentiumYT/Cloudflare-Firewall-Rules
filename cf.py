@@ -15,6 +15,7 @@ class Cloudflare:
         }
 
         self.utils = Utils()
+        self.error = Error()
 
         self.plan = "free"
         self.rules = 5
@@ -30,13 +31,13 @@ class Cloudflare:
 
         r = requests.get("https://api.cloudflare.com/client/v4/zones/", headers=self._headers)
 
-        zones_count = r.json()["result_info"]["count"]
-        zones = [x["name"] for x in r.json()["result"]]
+        zones_count = self.error.handle(r.json(), ["result_info", "count"])
+        zones = [x["name"] for x in self.error.handle(r.json(), ["result"])]
 
         return {
             "count": zones_count,
             "domains": zones,
-            "result": r.json()["result"]
+            "result": self.error.handle(r.json(), ["result"])
         }
 
     @property
@@ -48,7 +49,12 @@ class Cloudflare:
 
         r = requests.get(f"https://api.cloudflare.com/client/v4/zones/?name={domain_name}", headers=self._headers)
 
-        return r.json()["result"][0]
+        zone = self.error.handle(r.json(), ["result", 0])
+
+        if not zone:
+            exit(f"Domain '{domain_name}' not found")
+
+        return zone
 
     def set_plan(self, domain_name):
         """Save current website plan"""
@@ -75,15 +81,15 @@ class Cloudflare:
 
         r = requests.get(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules", headers=self._headers)
 
-        rules_count = r.json()["result_info"]["count"]
-        rules = [x["description"] for x in r.json()["result"]]
+        rules_count = self.error.handle(r.json(), ["result_info", "count"])
+        rules = [x["description"] for x in self.error.handle(r.json(), ["result"])]
 
         self.active_rules = rules_count
 
         return {
             "count": rules_count,
             "rules": rules,
-            "result": r.json()["result"]
+            "result": self.error.handle(r.json(), ["result"])
         }
 
     def get_rule(self, domain_name, rule_name):
@@ -94,10 +100,12 @@ class Cloudflare:
 
         r = requests.get(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules?description={rule_name}", headers=self._headers)
 
-        if r.json()["result"]:
-            return r.json()["result"][0]
-        else:
-            return None
+        rule = self.error.handle(r.json(), ["result", 0])
+
+        if not rule:
+            exit(f"Rule '{rule_name}' not found")
+
+        return rule
 
     def export_rules(self, domain_name):
         """Export all expressions from a specific domain"""
@@ -138,7 +146,7 @@ class Cloudflare:
         if self.active_rules < self.rules:
             r = requests.post(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules", headers=self._headers, json=new_rule)
 
-        return r.json()["success"]
+        return self.error.handle(r.json(), ["success"])
 
     def update_rule(self, domain_name, rule_name, rule_file, action="block"):
         """Update a rule with a specific expression"""
@@ -149,16 +157,16 @@ class Cloudflare:
         filter = self.get_rule(domain_name, rule_name)
         if filter:
             filter = filter["filter"]
+            filter_id = filter["id"]
         else:
-            return False
-        filter_id = filter["id"]
+            return {"error": "Filter not found"}
 
         new_filter = filter.copy()
         new_filter["expression"] = self.utils.read_expression(rule_file)
 
         r = requests.put(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/filters/{filter_id}", headers=self._headers, json=new_filter)
 
-        return r.json()["success"]
+        return self.error.handle(r.json(), ["success"])
 
     def import_rules(self, domain_name, action="block"):
         """Import all expressions from all txt file"""
@@ -216,7 +224,42 @@ class Utils:
     def read_expression(self, rule_file):
         """Read an expression from a file"""
 
-        with open(f"{self.directory}/{self.escape(rule_file)}.txt", "r") as file:
-            expression = [x.strip() for x in file.readlines()]
+        filename = f"{self.directory}/{self.escape(rule_file)}.txt"
+
+        if os.path.isfile(filename):
+            with open(filename, "r") as file:
+                expression = [x.strip() for x in file.readlines()]
+        else:
+            print(f"No such file in folder '{self.directory}'")
+            return
 
         return " ".join(expression)
+
+    def get_json_key(self, json, keys):
+        """Get an element from a json using a list of keys"""
+
+        for key in keys:
+            if isinstance(key, str):
+                if key in json:
+                    json = json[key]
+                else:
+                    return False
+            elif isinstance(key, int):
+                if len(json) > key:
+                    json = json[key]
+                else:
+                    return False
+
+        return json
+
+
+
+class Error:
+    def __init__(self):
+        self.utils = Utils()
+
+    def handle(self, request_json, keys):
+        if request_json["success"]:
+            return self.utils.get_json_key(request_json, keys)
+        else:
+            return {"error": self.utils.get_json_key(request_json, ["errors", 0, "message"])}
