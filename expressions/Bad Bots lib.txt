@@ -1,0 +1,14 @@
+(http.user_agent contains "zgrab/") or
+(http.user_agent contains "python-requests/") or
+(http.user_agent contains "python-httpx/") or
+(http.user_agent contains "Python-urllib/") or
+(http.user_agent contains "Python/") or
+(http.user_agent contains "CPython/") or
+(http.user_agent contains "PyCurl/") or
+(http.user_agent contains "aiohttp/") or
+(http.user_agent contains "Java/") or
+(http.user_agent contains "okhttp/") or
+(http.user_agent contains "Go-http-client/") or
+(http.user_agent contains "Go http package") or
+(http.user_agent contains "axios/") or
+(http.user_agent contains "libwww-perl/")

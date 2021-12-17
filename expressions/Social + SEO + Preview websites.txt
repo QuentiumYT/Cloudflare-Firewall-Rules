@@ -1,0 +1,17 @@
+(http.user_agent contains "facebook.com") or
+(http.user_agent contains "snap.com") or
+(http.user_agent contains "snapchat.com") or
+(http.user_agent contains "slack.com") or
+(http.user_agent contains "commoncrawl.org") or
+(http.user_agent contains "mixnode.com") or
+(http.user_agent contains "netsystemsresearch.com") or
+(http.user_agent contains "expanseinc.com") or
+(http.user_agent contains "opensiteexplorer.org") or
+(http.user_agent contains "website-datenbank.de") or
+(http.user_agent contains "censys.io") or
+(http.user_agent contains "bnf.fr_bot") or
+(http.user_agent contains "leak.info") or
+(http.user_agent contains "bl.uk") or
+(http.user_agent contains "ltx71.com") or
+(http.user_agent contains "iframely.com") or
+(http.user_agent contains "embed.ly")

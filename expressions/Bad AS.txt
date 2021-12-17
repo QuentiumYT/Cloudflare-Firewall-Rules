@@ -1,0 +1,7 @@
+(ip.geoip.asnum eq 24940) or
+(ip.geoip.asnum eq 6848) or
+(ip.geoip.asnum eq 16276 and
+ip.src ne 51.91.122.127) or
+(ip.geoip.asnum eq 197922) or
+(ip.geoip.asnum eq 32934) or
+(ip.geoip.asnum eq 136907)

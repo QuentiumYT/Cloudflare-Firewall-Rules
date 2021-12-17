@@ -1,0 +1,4 @@
+(http.user_agent contains "sleep(") or
+(http.user_agent contains "waitfor delay") or
+(http.user_agent contains "OR 2") or
+(http.user_agent contains "OR 3")
