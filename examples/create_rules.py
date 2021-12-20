@@ -10,7 +10,8 @@ rule_to_create_name = "Handle Bad Bots"
 # "Bad Bots.txt" must exist in your expressions folder
 rule_to_create_file = "Bad Bots"
 
-cf = Cloudflare(os.environ.get("EMAIL"), os.environ.get("KEY"), "expressions_main")
+cf = Cloudflare("expressions")
+cf.auth(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
 domains = cf.domains["domains"]
 

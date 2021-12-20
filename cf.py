@@ -1,9 +1,23 @@
 import requests, os
 
 class Cloudflare:
-    def __init__(self, email, key, folder=None):
-        """Generate a specific token through cloudflare profile
+    def __init__(self, folder=None):
+        """Initialize Cloudflare class
+
+        Specify a folder argument where expressions will be saved
+        """
+        self.utils = Utils(folder)
+        self.error = Error()
+
+        self.plan = "free"
+        self.rules = 5
+        self.active_rules = 0
+
+    def auth(self, email, key):
+        """Get your global API Key through cloudflare profile (API Keys section)
+
         https://dash.cloudflare.com/profile/api-tokens
+
         * email -> Email account
         * key -> Global API Key
         """
@@ -14,12 +28,18 @@ class Cloudflare:
             "Content-Type": "application/json"
         }
 
-        self.utils = Utils(folder)
-        self.error = Error()
+    def auth_bearer(self, bearer):
+        """Generate a specific token through cloudflare profile (API Tokens section)
 
-        self.plan = "free"
-        self.rules = 5
-        self.active_rules = 0
+        https://dash.cloudflare.com/profile/api-tokens
+
+        * bearer -> Bearer token
+        """
+
+        self._headers = {
+            "Authorization": "Bearer " + bearer,
+            "Content-Type": "application/json"
+        }
 
     def beautify(self, expression):
         """Beautify a cloudflare expression"""

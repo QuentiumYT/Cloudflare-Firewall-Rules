@@ -8,7 +8,8 @@ dotenv.load_dotenv(".env")
 
 rule_to_update = "Handle Bad Bots"
 
-cf = Cloudflare(os.environ.get("EMAIL"), os.environ.get("KEY"), "expressions_main")
+cf = Cloudflare("expressions_main")
+cf.auth(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
 # Export all rules from the main domain
 s = cf.export_rules("main-domain.com")

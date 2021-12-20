@@ -7,7 +7,8 @@ from cf import Cloudflare
 
 dotenv.load_dotenv(".env")
 
-cf = Cloudflare(os.environ.get("EMAIL"), os.environ.get("KEY"), "expressions_main")
+cf = Cloudflare("my_expressions")
+cf.auth(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
 domains = cf.domains
 

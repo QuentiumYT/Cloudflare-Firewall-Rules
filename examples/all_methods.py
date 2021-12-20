@@ -15,7 +15,8 @@ utils = Utils()
 
 dotenv.load_dotenv(".env")
 
-cf = Cloudflare(os.environ.get("EMAIL"), os.environ.get("KEY"))
+cf = Cloudflare()
+cf.auth(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
 # c = cf.domains # OR c = cf.get_domains()
 # print(c)
