@@ -20,8 +20,14 @@ cd Cloudflare-Firewall-Rules
 
 ## 🚀 Usage
 
-Generate a Global API Key here: https://dash.cloudflare.com/profile/api-tokens
+Generate a Global API Key or a specific API Token here: https://dash.cloudflare.com/profile/api-tokens
+
+![Cloudflare Key](/images/cloudflare_key.png)
+
 An API token could work as well if you give the correct permissions for Cloudflare's firewall rules.
+The required permissions are "Zone.Zone, Zone.Firewall Services"
+
+![Cloudflare Token](/images/cloudflare_token.png)
 
 ---
 
