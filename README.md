@@ -36,7 +36,10 @@ Create any Python file in the cloned directory and paste these lines
 ```python
 from cf import Cloudflare
 
-cf = Cloudflare("cloudflare@example.com", "your-global-api-key")
+cf = Cloudflare()
+cf.auth("cloudflare@example.com", "your-global-api-key")
+# OR
+cf.auth_bearer("your-specific-bearer-token")
 
 domains = cf.domains["domains"]
 
