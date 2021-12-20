@@ -67,6 +67,10 @@ cf.update_rule("example.com", "My Bad Bots FW rule", "Bad Bots lib")
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change and join your fork with the modifications.\
 Please make sure to test your suggestions before committing.
 
+If you don't feel comfortable coding, you can submit your idea about what you would like to see implemented.
+
+Any PR with small code examples or better documentation changes is appreciated :)
+
 ## 👤 Author
 
 **Quentin L.**
