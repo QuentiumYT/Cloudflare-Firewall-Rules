@@ -328,6 +328,17 @@ class Utils:
         if not os.path.isdir(self.directory):
             os.mkdir(self.directory)
 
+    def change_directory(self, directory: str) -> None:
+        """Change the directory where the expressions are stored
+
+        >>> utils.change_directory("my_expressions2")
+        """
+
+        self.directory = directory
+
+        if not os.path.isdir(self.directory):
+            os.mkdir(self.directory)
+
     def escape(self, string) -> str:
         """Escape a string
 

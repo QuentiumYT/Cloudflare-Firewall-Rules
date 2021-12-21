@@ -30,6 +30,9 @@ cf.auth(os.environ.get("EMAIL"), os.environ.get("KEY"))
 # cf.export_rules("test.fr")
 # cf.export_rule("test.fr", "Bad Bots")
 
+# cf.utils.change_directory("expressions2")
+# cf.export_rule("test.fr", "Test/1")
+
 # c = cf.create_rule("test.fr", "Test/1", "+test", action="js_challenge")
 # c = cf.import_rule("test.fr", "Bots", "Bad Bots")
 # c = cf.update_rule("test.fr", "Bad Bots", "Bad Bots")
