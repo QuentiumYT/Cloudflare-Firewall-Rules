@@ -383,7 +383,8 @@ class Utils:
 
         if os.path.isfile(filename):
             with open(filename, "r") as file:
-                expression = [x.strip() for x in file.readlines()]
+                expression = [x.strip() for x in file.readlines()
+                              if not x.strip().startswith("#")]
         else:
             print(f"No such file in folder '{self.directory}'")
             return

@@ -1,7 +1,13 @@
+# Comments are now supported!
+# Hetzner Online GmbH
 (ip.geoip.asnum eq 24940) or
-(ip.geoip.asnum eq 6848) or
-(ip.geoip.asnum eq 16276 and
-ip.src ne 51.91.122.127) or
+# DigitalOcean, LLC
+(ip.geoip.asnum eq 14061) or
+# OVH SAS
+(ip.geoip.asnum eq 16276) or
+# Techcrea Solutions SAS
 (ip.geoip.asnum eq 197922) or
-(ip.geoip.asnum eq 32934) or
-(ip.geoip.asnum eq 136907)
+# HUAWEI INTERNATIONAL PTE. LTD.
+(ip.geoip.asnum eq 136907) or
+# Facebook, Inc.
+(ip.geoip.asnum eq 32934)
