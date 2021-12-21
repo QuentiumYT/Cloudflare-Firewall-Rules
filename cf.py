@@ -219,7 +219,7 @@ class Cloudflare:
             rule_name = rule["description"]
         rule_expression = self.beautify(rule["filter"]["expression"])
 
-        self.utils.write_expression(custom_name, rule_expression)
+        self.utils.write_expression(rule_name, rule_expression)
 
         return True
 
