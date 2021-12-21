@@ -178,7 +178,8 @@ class Cloudflare:
         rule = self.error.handle(r.json(), ["result", 0])
 
         if not rule:
-            return f"Rule '{rule_name}' not found"
+            print(f"Rule '{rule_name}' not found")
+            return
 
         return rule
 
