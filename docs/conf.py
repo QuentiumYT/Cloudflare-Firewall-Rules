@@ -12,7 +12,7 @@
 
 import os
 import sys
-sys.path.insert(0, '../')
+sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
@@ -27,9 +27,11 @@ version = '1.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx_copybutton',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.viewcode',
+    'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
 ]
 
@@ -66,6 +68,13 @@ html_theme_options = {
     'navigation_depth': 4,
     'includehidden': True,
     'titles_only': False
+}
+
+html_context = {
+    'display_github': True,
+    'github_user': 'QuentiumYT',
+    'github_repo': 'Cloudflare-Firewall-Rules',
+    'github_version': 'main/docs/',
 }
 
 # The name of an image file (relative to this directory) to place at the top
