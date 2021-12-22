@@ -91,6 +91,10 @@ html_favicon = '_static/img/favicon.ico'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_css_files = [
+    'css/custom.css',
+]
+
 html_domain_indices = True
 
 html_show_sphinx = False
