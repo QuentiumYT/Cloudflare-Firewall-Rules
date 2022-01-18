@@ -1,0 +1,51 @@
+name: Make HTML docs
+
+on:
+  push:
+    # branches:
+    #   - main
+    paths:
+      - "docs/**"
+
+jobs:
+  docs:
+    name: Build docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          lfs: true
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: |
+          python -m pip install -U pip
+          pip install -U sphinx sphinx-rtd-theme sphinx-copybutton
+      - name: Sphinx problems report
+        uses: ammaraskar/sphinx-problem-matcher@master
+      - name: Build Sphinx docs
+        run: |
+          cd docs/
+          make html
+          sed -i 's/url_root="#"/url_root=""/' _build/html/index.html || true
+      - name: Commit documentation changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git checkout --orphan gh-pages
+          git rm -rf .
+          mv docs/_build/html/* .
+          rm -rf __pycache__/ _sources/ docs/
+          touch .nojekyll
+          git add .
+          git commit -m "Update documentation" -a || true
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
