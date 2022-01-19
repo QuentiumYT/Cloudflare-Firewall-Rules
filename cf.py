@@ -164,8 +164,6 @@ class Cloudflare:
     def get_rule(self, domain_name: str, rule_name: str) -> dict | str:
         """Get a specific rule from a specific domain
 
-
-
         >>> cf.get_rule("example.com", "Bad Bots")
         >>> {"id": "123", "paused": False, "description": "Bad Bots", "action": "block", "filter": {"id": "456", "expression": "(http.user_agent contains "python-requests/")" ...}}
         """
@@ -259,17 +257,36 @@ class Cloudflare:
         zone = self.get_domain(domain_name)
         zone_id = zone["id"]
 
-        filter = self.get_rule(domain_name, rule_name)
-        if filter:
-            filter = filter["filter"]
+        rule = self.get_rule(domain_name, rule_name)
+        if rule:
+            filter = rule["filter"]
             filter_id = filter["id"]
         else:
-            return {"error": "Filter not found"}
+            return {"error": "Rule not found"}
 
         new_filter = filter.copy()
         new_filter["expression"] = self.utils.read_expression(rule_file)
 
         r = requests.put(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/filters/{filter_id}", headers=self._headers, json=new_filter)
+
+        return self.error.handle(r.json(), ["success"])
+
+    def delete_rule(self, domain_name: str, rule_name: str) -> bool:
+        """Delete a rule from a specific domain
+
+        >>> cf.delete_rule("example.com", "Second Test")
+        """
+
+        zone = self.get_domain(domain_name)
+        zone_id = zone["id"]
+
+        rule = self.get_rule(domain_name, rule_name)
+        if rule:
+            rule_id = rule["id"]
+        else:
+            return {"error": "Rule not found"}
+
+        r = requests.delete(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules/{rule_id}", headers=self._headers)
 
         return self.error.handle(r.json(), ["success"])
 
