@@ -459,7 +459,7 @@ class Error:
 
         if request_json["errors"]:
             # Authentication error, Invalid access token
-            if any(x in request_json["errors"][0]["code"] for x in [10000, 9109]):
+            if any(x == request_json["errors"][0]["code"] for x in [10000, 9109]):
                 raise SystemExit(request_json["errors"][0]["message"])
 
         if request_json["success"]:
