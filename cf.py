@@ -290,6 +290,21 @@ class Cloudflare:
 
         return self.error.handle(r.json(), ["success"])
 
+    def purge_rules(self, domain_name: str) -> bool:
+        """Purge all rules from a specific domain
+
+        >>> cf.purge_rules("example.com")
+        """
+
+        rules = self.get_rules(domain_name)["rules"]
+
+        for rule in rules:
+            self.delete_rule(domain_name, rule)
+
+        self.active_rules = 0
+
+        return True
+
     def import_rules(self, domain_name: str, actions_all: str = "block") -> bool:
         """Import all expressions from all txt file
 
