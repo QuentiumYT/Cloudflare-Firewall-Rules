@@ -13,7 +13,7 @@ rule_to_create_file = "Bad Bots"
 cf = Cloudflare("expressions")
 cf.auth(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
-domains = cf.domains["domains"]
+domains = cf.domains # List of domains as objects
 
 # Update your rule for all domains
 for domain in domains:

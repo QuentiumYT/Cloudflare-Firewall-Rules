@@ -10,13 +10,25 @@ dotenv.load_dotenv(".env")
 cf = Cloudflare("my_expressions")
 cf.auth(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
-domains = cf.domains
+# Get domains
 
-print(f"There are {domains['count']} domains available for your account.")
+domains = cf.get_domains()
+
+print(f"There are {domains['count']} domains available for your account:")
 
 print(" ".join(domains["domains"]))
 
-for domain in domains["result"]:
+# Same as
+
+domains = cf.domains
+
+print(f"There are {len(domains)} domains available for your account:")
+
+print(" ".join([x.name for x in domains]))
+
+
+
+for domain in domains:
     print(f"{domain['name']} is {domain['status']}")
     created = datetime.fromisoformat(domain['created_on'].replace("Z", ""))
     print("Created on " + created.strftime("%Y-%m-%d %H:%M:%S"))

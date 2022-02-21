@@ -16,9 +16,7 @@ s = cf.export_rules("main-domain.com")
 
 # TODO Edit your rules before updating them back to Cloudflare
 
-domains = cf.domains["domains"]
-
 # Update your rule for all domains
-for domain in domains:
-    s = cf.update_rule(domain, rule_to_update, "Bad Bots")
+for domain in cf.domains:
+    s = cf.update_rule(domain.name, rule_to_update, "Bad Bots")
     print(s)

@@ -18,8 +18,11 @@ dotenv.load_dotenv(".env")
 cf = Cloudflare()
 cf.auth(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
-# c = cf.domains # OR c = cf.get_domains()
-# print(c)
+# c = cf.domains
+# print([x.name for x in c])
+
+# c = cf.get_domains()
+# print(c["count"])
 
 # c = cf.get_domain("test.fr")
 # cf.set_plan("test.fr")
