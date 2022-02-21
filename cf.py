@@ -85,6 +85,9 @@ class Cloudflare:
         >>> {"count": 1, "domains": ["example.com"], "result": [{"id": "123", "name": "example.com", ...}]}
         """
 
+        if not hasattr(self, "_headers"):
+            raise SystemExit("You must authenticate first, use cf.auth(email, key) or cf.auth_bearer(bearer)")
+
         r = requests.get("https://api.cloudflare.com/client/v4/zones/", headers=self._headers)
 
         zones_count = self.error.handle(r.json(), ["result_info", "count"])
@@ -124,6 +127,9 @@ class Cloudflare:
         >>> domain.name # OR domain["name"]
         >>> 'example.com'
         """
+
+        if not hasattr(self, "_headers"):
+            raise SystemExit("You must authenticate first, use cf.auth(email, key) or cf.auth_bearer(bearer)")
 
         r = requests.get(f"https://api.cloudflare.com/client/v4/zones/?name={domain_name}", headers=self._headers)
 
