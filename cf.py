@@ -194,9 +194,14 @@ class Cloudflare:
         rules = self.get_rules(domain_name)
 
         for rule in rules["result"]:
+            header = {
+                "action": rule["action"],
+                "paused": rule["paused"],
+                "priority": rule["priority"]
+            }
             rule_expression = self.beautify(rule["filter"]["expression"])
 
-            self.utils.write_expression(rule["description"], rule_expression)
+            self.utils.write_expression(rule["description"], rule_expression, header=header)
 
         return True
 
@@ -211,34 +216,57 @@ class Cloudflare:
         """
 
         rule = self.get_rule(domain_name, rule_name)
+
         if custom_name:
             rule_name = custom_name
         else:
             rule_name = rule["description"]
+
+        header = {
+            "action": rule["action"],
+            "paused": rule["paused"],
+            "priority": rule["priority"]
+        }
         rule_expression = self.beautify(rule["filter"]["expression"])
 
-        self.utils.write_expression(rule_name, rule_expression)
+        self.utils.write_expression(rule_name, rule_expression, header=header)
 
         return True
 
-    def create_rule(self, domain_name: str, rule_name: str, rule_file: str, action: str = "block") -> bool:
+    def create_rule(self, domain_name: str, rule_name: str, rule_file: str, action: str = None) -> bool:
         """Create a rule with a specific expression
 
         * action -> Please refer to https://developers.cloudflare.com/firewall/cf-firewall-rules/actions/
 
-        >>> cf.create_rule("example.com", "Second Test", "Test2", "challenge")
+        Available actions as string:
+        `block, challenge, js_challenge, managed_challenge, allow, log, bypass`
+
+        >>> cf.create_rule("example.com", "Second Test", "Test2")
+        # Create a rule with the expression in "Test2.txt", will use the action in the header if specified
+        >>> cf.create_rule("example.com", "Second Test", "Test2", "managed_challenge")
         """
 
         zone = self.get_domain(domain_name)
         zone_id = zone["id"]
 
+        header, expression = self.utils.read_expression(rule_file)
+
         new_rule = [{
             "description": rule_name,
-            "action": action,
             "filter": {
-                "expression": self.utils.read_expression(rule_file)
+                "expression": expression
             }
         }]
+
+        if header:
+            if action or "action" in header:
+                new_rule[0]["action"] = action if action else header["action"]
+            else:
+                action = "managed_challenge"
+            if "paused" in header:
+                new_rule[0]["paused"] = header["paused"]
+            if "priority" in header:
+                new_rule[0]["priority"] = header["priority"]
 
         if self.active_rules < self.rules:
             r = requests.post(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules", headers=self._headers, json=new_rule)
@@ -258,13 +286,24 @@ class Cloudflare:
         zone_id = zone["id"]
 
         rule = self.get_rule(domain_name, rule_name)
+
         if rule:
             updated_rule = rule.copy()
             rule_id = updated_rule["id"]
         else:
             return {"error": "Rule not found"}
 
-        updated_rule["filter"]["expression"] = self.utils.read_expression(rule_file)
+        header, expression = self.utils.read_expression(rule_file)
+
+        if header:
+            if "action" in header:
+                updated_rule["action"] = header["action"]
+            if "paused" in header:
+                updated_rule["paused"] = header["paused"]
+            if "priority" in header:
+                updated_rule["priority"] = header["priority"]
+
+        updated_rule["filter"]["expression"] = expression
 
         r = requests.put(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules/{rule_id}", headers=self._headers, json=updated_rule)
 
@@ -280,6 +319,7 @@ class Cloudflare:
         zone_id = zone["id"]
 
         rule = self.get_rule(domain_name, rule_name)
+
         if rule:
             rule_id = rule["id"]
         else:
@@ -304,15 +344,21 @@ class Cloudflare:
 
         return True
 
-    def import_rules(self, domain_name: str, actions_all: str = "block") -> bool:
+    def import_rules(self, domain_name: str, actions_all: str = None) -> bool:
         """Import all expressions from all txt file
 
         * actions_all -> Set the same action for all imported rules, please refer to https://developers.cloudflare.com/firewall/cf-firewall-rules/actions/
 
+        Available actions as string:
+        `block, challenge, js_challenge, managed_challenge, allow, log, bypass`
+
         .. note::
             If you have a better plan, please register your plan using the method :func:`set_plan`
 
-        >>> cf.import_rules("example.com", "js_challenge")
+        >>> cf.import_rules("example.com")
+        # Will use the action in the header specific for every file
+        >>> cf.import_rules("example.com", "block")
+        # Set all rules to block action
         """
 
         files = os.listdir(self.utils.directory)
@@ -328,7 +374,10 @@ class Cloudflare:
                 if not name in rules:
                     if self.active_rules < self.rules:
                         print("Creating rule:", name)
-                        self.create_rule(domain_name, name, name, actions_all)
+                        if actions_all:
+                            self.create_rule(domain_name, name, name, actions_all)
+                        else:
+                            self.create_rule(domain_name, name, name)
                         self.active_rules += 1
                     else:
                         print("Cannot create more rules ({} used / {} available)".format(self.active_rules, self.rules))
@@ -342,7 +391,7 @@ class Cloudflare:
     
     Alias for :func:`create_rule`
     
-    >>> cf.import_rule("example.com", "Second Test", "Test2", "challenge")
+    >>> cf.import_rule("example.com", "Second Test", "Test2", "managed_challenge")
     """
 
 
@@ -394,16 +443,20 @@ class Utils:
         # return string.replace("___", " - ").replace("_", " ")
         return string.replace("_", "/")
 
-    def write_expression(self, rule_name: str, rule_expression: str) -> None:
+    def write_expression(self, rule_name: str, rule_expression: str, header: dict | None = None) -> None:
         """Write an expression to a readable text file
 
         >>> utils.write_expression("IsBot", "(cf.client.bot)")
+        >>> utils.write_expression("IsBot", "(cf.client.bot)", header={"action": "allow"})
         """
 
         with open(f"{self.directory}/{self.escape(rule_name)}.txt", "w") as file:
+            if header:
+                data = " ".join(f"{x}:{y}" for x, y in header.items())
+                file.write(f"#! {data} !#\n")
             file.write(rule_expression)
 
-    def read_expression(self, rule_file: str) -> str:
+    def read_expression(self, rule_file: str) -> tuple[str | None, str]:
         """Read an expression from a file
 
         >>> utils.read_expression("IsBot")
@@ -414,13 +467,47 @@ class Utils:
 
         if os.path.isfile(filename):
             with open(filename, "r") as file:
+                header = self.process_header(file.readline().strip())
+
                 expression = [x.strip() for x in file.readlines()
                               if not x.strip().startswith("#")]
         else:
             print(f"No such file in folder '{self.directory}'")
             return
 
-        return " ".join(expression)
+        return header, " ".join(expression)
+
+    def process_header(self, header_line: str) -> dict | None:
+        """Process the header of an expression file if it exists
+        It retrieves all header data and returns a dictionary
+
+        >>> utils.process_header("#! action:block paused:False priority:42 !#")
+        >>> {"action": "block", "paused": "False", "priority": "42"}
+        """
+
+        if header_line.startswith("#!") and header_line.endswith("!#"):
+            header_data = header_line[2:-2].strip()
+            header = {x: y for x, y in [x.split(":") for x in header_data.split(" ")]}
+
+            if "action" in header:
+                # List of all available actions for CloudFlare
+                available_actions = ["block", "challenge", "js_challenge", "managed_challenge", "allow", "log", "bypass"]
+
+                if header["action"] not in available_actions:
+                    del header["action"]
+                    print("The action in the header is not valid, ignoring it...")
+                    print("List of available actions: " + ", ".join(available_actions))
+            if "paused" in header:
+                header["paused"] = False if header["paused"].lower() == "false" else True
+            if "priority" in header:
+                if header["priority"].isdigit():
+                    header["priority"] = int(header["priority"])
+                else:
+                    del header["priority"]
+        else:
+            header = None
+
+        return header
 
     def get_json_key(self, json: dict, keys: list[str | int]) -> dict | bool:
         """Get an element from a json using a list of keys
