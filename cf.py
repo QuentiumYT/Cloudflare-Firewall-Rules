@@ -25,7 +25,7 @@ class Cloudflare:
         """Get your global API Key through cloudflare profile (API Keys section)
 
         .. warning::
-            This will grant all domains access to this API library
+            This will grant all domains access to this API library, prefer using :func:`auth_bearer`
 
         https://dash.cloudflare.com/profile/api-tokens
 
@@ -44,7 +44,7 @@ class Cloudflare:
     def auth_bearer(self, bearer: str) -> None:
         """Generate a specific token through cloudflare profile (API Tokens section)
 
-        .. warning::
+        .. note::
             This will grant only specific domains/permissions access to this API library
 
         https://dash.cloudflare.com/profile/api-tokens
@@ -73,7 +73,7 @@ class Cloudflare:
         """Get all domains
 
         >>> cf.get_domains()
-        >>> {"count": 1, "domains": ["example.com"], "result": [{"id": "---", "name": "example.com", ...}]}
+        >>> {"count": 1, "domains": ["example.com"], "result": [{"id": "123", "name": "example.com", ...}]}
         """
 
         r = requests.get("https://api.cloudflare.com/client/v4/zones/", headers=self._headers)
@@ -96,22 +96,22 @@ class Cloudflare:
         Better handling compared to :func:`get_domains`, return directly the result key of the function
 
         >>> cf.domains
-        >>> [{"id": "---", "name": "example.com", ...}, {"id": "---", "name": "example.net", ...}]
+        >>> [{"id": "123", "name": "example.com", ...}, {"id": "456", "name": "example.net", ...}]
         >>> 
         """
 
         return [DomainObject(x) for x in self.get_domains()["result"]]
 
-        """Get all domains
     def get_domain(self, domain_name: str) -> DomainObject:
+        """Get a specific domain as :class:`DomainObject`
 
-        :exception SystemExit: If domain not found (:func:`get_domains`)
+        :exception SystemExit: If domain is not found (list all domains using cf.domains)
 
         .. important::
             This function is the "core" for all other functions, it raise a SystemExit exception because nothing else can work without a domain
 
         >>> cf.get_domain("example.com")
-        >>> {"id": "---", "name": "example.com", ...}
+        >>> {"id": "123", "name": "example.com", ...}
         >>> domain = cf.get_domain("example.com")
         >>> domain.name # OR domain["name"]
         >>> 'example.com'
