@@ -228,9 +228,11 @@ class Cloudflare:
         for rule in rules["result"]:
             header = {
                 "action": rule["action"],
-                "paused": rule["paused"],
-                "priority": rule["priority"]
+                "paused": rule["paused"]
             }
+            if "priority" in rule:
+                header["priority"] = rule["priority"]
+
             rule_expression = self.beautify(rule["filter"]["expression"])
 
             self.utils.write_expression(rule["description"], rule_expression, header=header)
