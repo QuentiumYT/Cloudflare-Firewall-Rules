@@ -259,15 +259,14 @@ class Cloudflare:
 
         rule = self.get_rule(domain_name, rule_name)
         if rule:
-            filter = rule["filter"]
-            filter_id = filter["id"]
+            updated_rule = rule.copy()
+            rule_id = updated_rule["id"]
         else:
             return {"error": "Rule not found"}
 
-        new_filter = filter.copy()
-        new_filter["expression"] = self.utils.read_expression(rule_file)
+        updated_rule["filter"]["expression"] = self.utils.read_expression(rule_file)
 
-        r = requests.put(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/filters/{filter_id}", headers=self._headers, json=new_filter)
+        r = requests.put(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules/{rule_id}", headers=self._headers, json=updated_rule)
 
         return self.error.handle(r.json(), ["success"])
 
