@@ -180,6 +180,19 @@ class Cloudflare:
             "result": self.error.handle(r.json(), ["result"])
         }
 
+    def rules(self, domain_name: str) -> list[RuleObject]:
+        """Get all rules as a list of :class:`RuleObject`
+
+        Access any value of the object with the dot operator
+
+        Better handling compared to :func:`get_rules()`, return directly the result key of the function
+
+        >>> cf.rules
+        >>> [{"id": "123", "description": "Test", ...}, {"id": "456", "description": "Test2", ...}]
+        """
+
+        return [RuleObject(x) for x in self.get_rules(domain_name)["result"]]
+
     def get_rule(self, domain_name: str, rule_name: str) -> RuleObject:
         """Get a specific rule from a specific domain as :class:`RuleObject`
 
@@ -509,7 +522,7 @@ class Utils:
             header = {x: y for x, y in [x.split(":") for x in header_data.split(" ")]}
 
             if "action" in header:
-                # List of all available actions for CloudFlare
+                # List of all available actions for Cloudflare
                 available_actions = ["block", "challenge", "js_challenge", "managed_challenge", "allow", "log", "bypass"]
 
                 if header["action"] not in available_actions:
