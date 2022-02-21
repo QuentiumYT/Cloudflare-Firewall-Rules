@@ -1,5 +1,8 @@
 import requests, os
 
+__author__ = "Quentin L"
+__version__ = "1.2.0"
+
 class DomainObject(dict):
     def __init__(self, *args, **kwargs):
         super(DomainObject, self).__init__(*args, **kwargs)

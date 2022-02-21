@@ -17,9 +17,9 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'Cloudflare Firewall Rules'
-copyright = '2021, Quentin L'
+copyright = '2022, Quentin L'
 author = 'Quentin L'
-version = '1.0'
+version = '1.2.0'
 
 # -- General configuration ---------------------------------------------------
 
