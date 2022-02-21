@@ -1,5 +1,10 @@
 import requests, os
 
+class DomainObject(dict):
+    def __init__(self, *args, **kwargs):
+        super(DomainObject, self).__init__(*args, **kwargs)
+        self.__dict__ = self
+
 class Cloudflare:
     def __init__(self, folder: str = None):
         """Initialize Cloudflare class
@@ -83,19 +88,22 @@ class Cloudflare:
         }
 
     @property
-    def domains(self) -> dict:
-        """Get all domains
+    def domains(self) -> list[DomainObject]:
+        """Get all domains as a list of :class:`DomainObject`
 
-        Alias for :func:`get_domains`
+        Access any value of the object with the dot operator
 
-        >>> cf.get_domains()
-        >>> {"count": 1, "domains": ["example.com"], "result": [{"id": "123", "name": "example.com", ...}]}
+        Better handling compared to :func:`get_domains`, return directly the result key of the function
+
+        >>> cf.domains
+        >>> [{"id": "---", "name": "example.com", ...}, {"id": "---", "name": "example.net", ...}]
+        >>> 
         """
 
-        return self.get_domains()
+        return [DomainObject(x) for x in self.get_domains()["result"]]
 
-    def get_domain(self, domain_name: str) -> dict:
         """Get all domains
+    def get_domain(self, domain_name: str) -> DomainObject:
 
         :exception SystemExit: If domain not found (:func:`get_domains`)
 
@@ -104,16 +112,19 @@ class Cloudflare:
 
         >>> cf.get_domain("example.com")
         >>> {"id": "---", "name": "example.com", ...}
+        >>> domain = cf.get_domain("example.com")
+        >>> domain.name # OR domain["name"]
+        >>> 'example.com'
         """
 
         r = requests.get(f"https://api.cloudflare.com/client/v4/zones/?name={domain_name}", headers=self._headers)
 
-        zone = self.error.handle(r.json(), ["result", 0])
+        domain = self.error.handle(r.json(), ["result", 0])
 
-        if not zone:
+        if not domain:
             raise SystemExit(f"Domain '{domain_name}' not found")
 
-        return zone
+        return DomainObject(domain)
 
     def set_plan(self, domain_name: str) -> True:
         """Save current website plan
