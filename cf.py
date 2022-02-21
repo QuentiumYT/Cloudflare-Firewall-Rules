@@ -5,6 +5,12 @@ class DomainObject(dict):
         super(DomainObject, self).__init__(*args, **kwargs)
         self.__dict__ = self
 
+class RuleObject(dict):
+    def __init__(self, *args, **kwargs):
+        super(RuleObject, self).__init__(*args, **kwargs)
+        self.__dict__ = self
+
+
 class Cloudflare:
     def __init__(self, folder: str = None):
         """Initialize Cloudflare class
@@ -18,7 +24,7 @@ class Cloudflare:
         self.error = Error()
 
         self.plan = "free"
-        self.rules = 5
+        self.max_rules = 5
         self.active_rules = 0
 
     def auth(self, email: str, key: str) -> None:
@@ -97,7 +103,6 @@ class Cloudflare:
 
         >>> cf.domains
         >>> [{"id": "123", "name": "example.com", ...}, {"id": "456", "name": "example.net", ...}]
-        >>> 
         """
 
         return [DomainObject(x) for x in self.get_domains()["result"]]
@@ -139,13 +144,13 @@ class Cloudflare:
 
         match self.plan:
             case "free":
-                self.rules = 5
+                self.max_rules = 5
             case "pro":
-                self.rules = 20
+                self.max_rules = 20
             case "business":
-                self.rules = 100
+                self.max_rules = 100
             case "enterprise":
-                self.rules = 1000
+                self.max_rules = 1000
 
         return True
 
@@ -172,8 +177,8 @@ class Cloudflare:
             "result": self.error.handle(r.json(), ["result"])
         }
 
-    def get_rule(self, domain_name: str, rule_name: str) -> dict | str:
-        """Get a specific rule from a specific domain
+    def get_rule(self, domain_name: str, rule_name: str) -> RuleObject:
+        """Get a specific rule from a specific domain as :class:`RuleObject`
 
         >>> cf.get_rule("example.com", "Bad Bots")
         >>> {"id": "123", "paused": False, "description": "Bad Bots", "action": "block", "filter": {"id": "456", "expression": "(http.user_agent contains "python-requests/")" ...}}
@@ -190,7 +195,7 @@ class Cloudflare:
             print(f"Rule '{rule_name}' not found")
             return
 
-        return rule
+        return RuleObject(rule)
 
     def export_rules(self, domain_name: str) -> True:
         """Export all expressions from a specific domain
@@ -279,7 +284,7 @@ class Cloudflare:
             if "priority" in header:
                 new_rule[0]["priority"] = header["priority"]
 
-        if self.active_rules < self.rules:
+        if self.active_rules < self.max_rules:
             r = requests.post(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules", headers=self._headers, json=new_rule)
 
         return self.error.handle(r.json(), ["success"])
@@ -383,7 +388,7 @@ class Cloudflare:
             if file.endswith(".txt"):
                 name = self.utils.unescape(file.split(".")[0])
                 if not name in rules:
-                    if self.active_rules < self.rules:
+                    if self.active_rules < self.max_rules:
                         print("Creating rule:", name)
                         if actions_all:
                             self.create_rule(domain_name, name, name, actions_all)
@@ -391,7 +396,7 @@ class Cloudflare:
                             self.create_rule(domain_name, name, name)
                         self.active_rules += 1
                     else:
-                        print("Cannot create more rules ({} used / {} available)".format(self.active_rules, self.rules))
+                        print("Cannot create more rules ({} used / {} available)".format(self.active_rules, self.max_rules))
                         print("If you have a better plan, please register the domain plan using cf.set_plan(\"<your-domain>\")")
                         break
 
