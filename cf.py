@@ -301,12 +301,12 @@ class Cloudflare:
         if header:
             if action or "action" in header:
                 new_rule[0]["action"] = action if action else header["action"]
-            else:
-                action = "managed_challenge"
             if "paused" in header:
                 new_rule[0]["paused"] = header["paused"]
             if "priority" in header:
                 new_rule[0]["priority"] = header["priority"]
+        else:
+            new_rule[0]["action"] = action if action else "managed_challenge"
 
         if self.active_rules < self.max_rules:
             r = requests.post(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules", headers=self._headers, json=new_rule)
@@ -583,7 +583,7 @@ class Error:
 
         self.utils = Utils()
 
-    def handle(self, request_json: dict, keys: list[str | int]) -> bool | dict:
+    def handle(self, request_json: dict, keys: list[str | int]) -> any:
         """Handle errors from a request response
 
         :exception SystemExit: If auth error
