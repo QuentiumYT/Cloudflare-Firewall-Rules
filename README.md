@@ -16,20 +16,34 @@
 ```bash
 git clone https://github.com/QuentiumYT/Cloudflare-Firewall-Rules.git
 cd Cloudflare-Firewall-Rules
+pip install -r requirements.txt -U
 ```
 
 ## 🚀 Usage
 
-Generate a Global API Key or a specific API Token here: https://dash.cloudflare.com/profile/api-tokens
+You have 2 auth methods available:
+
+A Global API Key or a specific API Token generated from here: https://dash.cloudflare.com/profile/api-tokens
+
+### Cloudflare Global API Key
 
 ![Cloudflare Key](/images/cloudflare_key.png)
 
-An API token could work as well if you give the correct permissions for Cloudflare's firewall rules.
+Using a Global API Key, you will have access to everything allowed by a Cloudflare account. It can access all domains from every account you have, this might be overpowered...
+
+### Cloudflare API Token
+
+An API token is recommended to keep control of specific domains only. You will need to give the correct permissions for Cloudflare's firewall rules to work.
+
 The required permissions are "Zone.Zone, Zone.Firewall Services"
+
+![Cloudflare Token](/images/cloudflare_tokens.png)
+
+Here is a token creation example:
 
 ![Cloudflare Token](/images/cloudflare_token.png)
 
----
+## 💨 Quickstart
 
 You can use any example scripts in the examples folder, just create a .env file
 
@@ -75,9 +89,9 @@ Any PR with small code examples or better documentation changes is appreciated :
 
 **Quentin L.**
 
-- Website: [quentium.fr](https://quentium.fr/)
-- Twitter: [@QuentiumYT](https://twitter.com/QuentiumYT)
-- Contact: [Mail](mailto:pro@quentium.fr?subject=[Cloudflare]%20Contact%20for%20...)
+-   Website: [quentium.fr](https://quentium.fr/)
+-   Twitter: [@QuentiumYT](https://twitter.com/QuentiumYT)
+-   Contact: [Mail](mailto:pro@quentium.fr?subject=[Cloudflare]%20Contact%20for%20...)
 
 Please ✰ this repository if this project helped you!
 
