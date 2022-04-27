@@ -5,7 +5,7 @@ Cloudflare Firewall Rules
 -------------------------
 Cloudflare Firewall Rules is a wrapper library that aims to easily create, modify, delete rules. It also provides a way to import & export new rules in your domain's firewall.
 
-If you have a single rule that you want to duplicate among your domains, this module is made for you!
+If you have several rules that you want to duplicate among your domains, this module is made for you!
 
 Links:
 * documentation
@@ -16,6 +16,9 @@ Links:
 
 from setuptools import setup
 
+with open("README.md", "r", encoding="utf-8") as file:
+    README = file.read()
+
 setup(
     name="cf-rules",
     version="1.2.0",
@@ -23,9 +26,9 @@ setup(
     license="Apache 2.0",
     author="Quentin Lienhardt",
     author_email="pro@quentium.fr",
-    description=("Wrapper library to import export / remote multiple rules "
+    description=("Wrapper library to import / export multiple remote rules "
                  "and easily create, modify and delete rules."),
-    long_description=__doc__,
+    long_description=README,
     long_description_content_type="text/markdown",
     py_modules=["cf_rules"],
     zip_safe=False,

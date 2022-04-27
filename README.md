@@ -11,6 +11,12 @@
 
 > #### A Cloudflare wrapper to bulk add / edit your firewall rules using Cloudflare's API.
 
+Cloudflare Firewall Rules is a wrapper module that aims to easily create, modify, delete rules. It also provides a way to import & export new rules in your domain's firewall.
+
+If you have some rules that you want to duplicate among your domains, this module is made for you!
+
+### A complete documentation can be found at: https://quentiumyt.github.io/Cloudflare-Firewall-Rules/
+
 ## 📥 Installation
 
 ```bash
