@@ -14,9 +14,13 @@
 ## 📥 Installation
 
 ```bash
+pip install cf_rules
+
+# OR
+
 git clone https://github.com/QuentiumYT/Cloudflare-Firewall-Rules.git
-cd Cloudflare-Firewall-Rules
-pip install -r requirements.txt -U
+cd Cloudflare-Firewall-Rules/
+pip install .
 ```
 
 ## 🚀 Usage
@@ -54,7 +58,7 @@ I might add more examples in the future, but everything is in the docs :)
 Create any Python file in the cloned directory and paste these lines
 
 ```python
-from cf import Cloudflare
+from cf_rules import Cloudflare
 
 cf = Cloudflare()
 cf.auth("cloudflare@example.com", "your-global-api-key")

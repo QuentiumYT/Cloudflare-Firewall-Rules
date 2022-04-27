@@ -2,7 +2,7 @@
 
 import os, dotenv
 
-from cf import Cloudflare, Utils
+from cf_rules import Cloudflare, Utils
 
 utils = Utils()
 

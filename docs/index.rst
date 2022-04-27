@@ -22,12 +22,17 @@ Installation:
 
 .. code-block:: bash
 
+    pip install cf_rules
+
+    # OR
+
     git clone https://github.com/QuentiumYT/Cloudflare-Firewall-Rules.git
     cd Cloudflare-Firewall-Rules/
+    pip install .
 
 .. code-block:: python3
     
-    from cf import Cloudflare
+    from cf_rules import Cloudflare
 
     cf = Cloudflare()
     cf.auth(email, password)

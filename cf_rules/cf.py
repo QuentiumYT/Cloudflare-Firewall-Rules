@@ -1,7 +1,6 @@
 import requests, os
 
-__author__ = "Quentin L"
-__version__ = "1.2.0"
+from cf_rules.utils import Utils, Error
 
 class DomainObject(dict):
     def __init__(self, *args, **kwargs):
