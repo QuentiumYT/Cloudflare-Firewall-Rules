@@ -43,6 +43,12 @@ class Cloudflare:
         >>> cf.auth("cloudflare@example.com", "your-global-api-key")
         """
 
+        if not email:
+            raise SystemExit("You must provide an email")
+
+        if not key:
+            raise SystemExit("You must provide an API key")
+
         self._headers = {
             "X-Auth-Email": email,
             "X-Auth-Key": key,
@@ -61,6 +67,9 @@ class Cloudflare:
 
         >>> cf.auth_bearer("your-specific-bearer-token")
         """
+
+        if not bearer:
+            raise SystemExit("You must provide a bearer token")
 
         self._headers = {
             "Authorization": "Bearer " + bearer,
