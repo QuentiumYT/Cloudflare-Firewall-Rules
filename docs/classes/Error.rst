@@ -1,7 +1,7 @@
 ﻿Error
 =====
 
-.. currentmodule:: cf
+.. currentmodule:: cf_rules
 
 .. autoclass:: Error
     :members:

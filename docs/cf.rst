@@ -1,7 +1,7 @@
-cf module
-=========
+cf_rules module
+===============
 
-.. automodule:: cf
+.. automodule:: cf_rules
    :members:
    :member-order: bysource
    :undoc-members:

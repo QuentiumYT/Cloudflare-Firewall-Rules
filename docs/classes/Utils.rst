@@ -1,7 +1,7 @@
 ﻿Utils
 =====
 
-.. currentmodule:: cf
+.. currentmodule:: cf_rules
 
 .. autoclass:: Utils
     :members:

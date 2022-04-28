@@ -1,7 +1,7 @@
 ﻿Cloudflare
 ==========
 
-.. currentmodule:: cf
+.. currentmodule:: cf_rules
 
 .. autoclass:: Cloudflare
     :members:
