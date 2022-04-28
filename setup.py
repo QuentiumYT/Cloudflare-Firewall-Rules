@@ -16,12 +16,15 @@ Links:
 
 from setuptools import setup
 
+with open("cf_rules/__init__.py", "r") as file:
+    VERSION = [x.split("=")[1].strip().strip('"') for x in file.readlines() if "__version__" in x][0]
+
 with open("README.md", "r", encoding="utf-8") as file:
     README = file.read()
 
 setup(
     name="cf-rules",
-    version="1.2.1",
+    version=VERSION,
     url="https://github.com/QuentiumYT/Cloudflare-Firewall-Rules",
     license="Apache 2.0",
     author="Quentin Lienhardt",

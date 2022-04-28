@@ -14,12 +14,14 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 
+from cf_rules import __version__
+
 # -- Project information -----------------------------------------------------
 
 project = 'Cloudflare Firewall Rules'
 copyright = '2022, Quentin L'
 author = 'Quentin L'
-version = '1.2.0'
+version = __version__
 
 # -- General configuration ---------------------------------------------------
 
