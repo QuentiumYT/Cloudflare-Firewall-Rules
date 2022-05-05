@@ -21,7 +21,7 @@ with open("README.md", "r", encoding="utf-8") as file:
 
 setup(
     name="cf-rules",
-    version="1.2.0",
+    version="1.2.1",
     url="https://github.com/QuentiumYT/Cloudflare-Firewall-Rules",
     license="Apache 2.0",
     author="Quentin Lienhardt",
