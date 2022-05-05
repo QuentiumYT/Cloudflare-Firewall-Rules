@@ -29,7 +29,7 @@ class Cloudflare:
         self.max_rules = 5
         self.active_rules = 0
 
-    def auth_key(self, email: str, key: str) -> None:
+    def auth_key(self, email: str, key: str) -> dict:
         """Get your global API Key through cloudflare profile (API Keys section)
 
         .. warning::
@@ -41,6 +41,9 @@ class Cloudflare:
         * key -> Global API Key
 
         >>> cf.auth_key("cloudflare@example.com", "your-global-api-key")
+        >>> {"success": True, {"result": {"id": "123", "email": "cloudflare@example.com", ...}}
+        # OR
+        >>> {"success": False, "errors": [{"code": 6003, "message": "Invalid request headers", ...}]}
         """
 
         if not email:
@@ -55,9 +58,13 @@ class Cloudflare:
             "Content-Type": "application/json"
         }
 
+        r = requests.get("https://api.cloudflare.com/client/v4/user", headers=self._headers)
+
+        return r.json()
+
     auth = auth_key
 
-    def auth_token(self, bearer_token: str) -> None:
+    def auth_token(self, bearer_token: str) -> dict:
         """Generate a specific token through cloudflare profile (API Tokens section)
 
         .. note::
@@ -68,6 +75,9 @@ class Cloudflare:
         * bearer_token -> API Token
 
         >>> cf.auth_token("your-specific-bearer-token")
+        >>> {"success": True, {"result": {"id": "123", "status": "active"}}, ...}
+        # OR
+        >>> {"success": False, "errors": [{"code": 9109, "message": "Invalid access token", ...}]}
         """
 
         if not bearer_token:
@@ -78,6 +88,10 @@ class Cloudflare:
             "Content-Type": "application/json"
         }
 
+        r = requests.get("https://api.cloudflare.com/client/v4/user/tokens/verify", headers=self._headers)
+
+        return r.json()
+
     auth_bearer = auth_token
 
     def beautify(self, expression: str) -> str:
@@ -85,7 +99,7 @@ class Cloudflare:
 
         >>> cf.beautify("(cf.client.bot) or (cf.threat_score ge 1)")
         # (cf.client.bot) or
-          (cf.threat_score ge 1)
+        # (cf.threat_score ge 1)
         """
 
         return expression.replace(" or ", " or\n").replace(" and ", " and\n")
@@ -100,7 +114,7 @@ class Cloudflare:
         if not hasattr(self, "_headers"):
             raise SystemExit("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer)")
 
-        r = requests.get("https://api.cloudflare.com/client/v4/zones/", headers=self._headers)
+        r = requests.get("https://api.cloudflare.com/client/v4/zones", headers=self._headers)
 
         zones_count = self.error.handle(r.json(), ["result_info", "count"])
         zones = [x["name"] for x in self.error.handle(r.json(), ["result"])]
@@ -137,7 +151,7 @@ class Cloudflare:
         >>> {"id": "123", "name": "example.com", ...}
         >>> domain = cf.get_domain("example.com")
         >>> domain.name # OR domain["name"]
-        >>> 'example.com'
+        >>> "example.com"
         """
 
         if not hasattr(self, "_headers"):
