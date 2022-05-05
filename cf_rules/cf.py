@@ -29,18 +29,18 @@ class Cloudflare:
         self.max_rules = 5
         self.active_rules = 0
 
-    def auth(self, email: str, key: str) -> None:
+    def auth_key(self, email: str, key: str) -> None:
         """Get your global API Key through cloudflare profile (API Keys section)
 
         .. warning::
-            This will grant all domains access to this API library, prefer using :func:`auth_bearer`
+            This will grant all domains access to this API library, prefer using :func:`auth_token`
 
         https://dash.cloudflare.com/profile/api-tokens
 
         * email -> Email account
         * key -> Global API Key
 
-        >>> cf.auth("cloudflare@example.com", "your-global-api-key")
+        >>> cf.auth_key("cloudflare@example.com", "your-global-api-key")
         """
 
         if not email:
@@ -55,7 +55,9 @@ class Cloudflare:
             "Content-Type": "application/json"
         }
 
-    def auth_bearer(self, bearer: str) -> None:
+    auth = auth_key
+
+    def auth_token(self, bearer_token: str) -> None:
         """Generate a specific token through cloudflare profile (API Tokens section)
 
         .. note::
@@ -63,18 +65,20 @@ class Cloudflare:
 
         https://dash.cloudflare.com/profile/api-tokens
 
-        * bearer -> Bearer token
+        * bearer_token -> API Token
 
-        >>> cf.auth_bearer("your-specific-bearer-token")
+        >>> cf.auth_token("your-specific-bearer-token")
         """
 
-        if not bearer:
+        if not bearer_token:
             raise SystemExit("You must provide a bearer token")
 
         self._headers = {
-            "Authorization": "Bearer " + bearer,
+            "Authorization": "Bearer " + bearer_token,
             "Content-Type": "application/json"
         }
+
+    auth_bearer = auth_token
 
     def beautify(self, expression: str) -> str:
         """Beautify a cloudflare expression
@@ -94,7 +98,7 @@ class Cloudflare:
         """
 
         if not hasattr(self, "_headers"):
-            raise SystemExit("You must authenticate first, use cf.auth(email, key) or cf.auth_bearer(bearer)")
+            raise SystemExit("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer)")
 
         r = requests.get("https://api.cloudflare.com/client/v4/zones/", headers=self._headers)
 
@@ -137,7 +141,7 @@ class Cloudflare:
         """
 
         if not hasattr(self, "_headers"):
-            raise SystemExit("You must authenticate first, use cf.auth(email, key) or cf.auth_bearer(bearer)")
+            raise SystemExit("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer)")
 
         r = requests.get(f"https://api.cloudflare.com/client/v4/zones/?name={domain_name}", headers=self._headers)
 
