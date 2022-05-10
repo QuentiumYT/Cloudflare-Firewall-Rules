@@ -60,7 +60,7 @@ class Utils:
                 file.write(f"#! {data} !#\n")
             file.write(rule_expression)
 
-    def read_expression(self, rule_file: str) -> tuple[str | None, str]:
+    def read_expression(self, rule_file: str) -> tuple[str | None, str | None]:
         """Read an expression from a file
 
         >>> utils.read_expression("IsBot")
@@ -77,7 +77,7 @@ class Utils:
                               if not x.strip().startswith("#")]
         else:
             print(f"No such file in folder '{self.directory}'")
-            return
+            return None, None
 
         return header, " ".join(expression)
 

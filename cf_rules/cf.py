@@ -14,6 +14,7 @@ class RuleObject(dict):
         self.__dict__ = self
 
 
+
 class Cloudflare:
     def __init__(self, folder: str = None):
         """Initialize Cloudflare class
@@ -48,10 +49,10 @@ class Cloudflare:
         """
 
         if not email:
-            raise SystemExit("You must provide an email")
+            return Error("You must provide an email")
 
         if not key:
-            raise SystemExit("You must provide an API key")
+            return Error("You must provide an API key")
 
         self._headers = {
             "X-Auth-Email": email,
@@ -82,7 +83,7 @@ class Cloudflare:
         """
 
         if not bearer_token:
-            raise SystemExit("You must provide a bearer token")
+            return Error("You must provide a bearer token")
 
         self._headers = {
             "Authorization": "Bearer " + bearer_token,
@@ -113,7 +114,7 @@ class Cloudflare:
         """
 
         if not hasattr(self, "_headers"):
-            raise SystemExit("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer)")
+            return Error("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer)")
 
         r = requests.get("https://api.cloudflare.com/client/v4/zones", headers=self._headers)
 
@@ -143,10 +144,11 @@ class Cloudflare:
     def get_domain(self, domain_name: str) -> DomainObject:
         """Get a specific domain as :class:`DomainObject`
 
-        :exception SystemExit: If domain is not found (list all domains using cf.domains)
+        :exception Error: If domain is not found (list all domains using cf.domains)
 
         .. important::
-            This function is the "core" for all other functions, it raise a SystemExit exception because nothing else can work without a domain
+            This function is the "core" for all other functions,
+            it raise an :class:`Error` if the domain is not found
 
         >>> cf.get_domain("example.com")
         >>> {"id": "123", "name": "example.com", ...}
@@ -156,14 +158,14 @@ class Cloudflare:
         """
 
         if not hasattr(self, "_headers"):
-            raise SystemExit("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer)")
+            raise Error("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer)")
 
         r = requests.get(f"https://api.cloudflare.com/client/v4/zones/?name={domain_name}", headers=self._headers)
 
         domain = self.error.handle(r.json(), ["result", 0])
 
         if not domain:
-            raise SystemExit(f"Domain '{domain_name}' not found")
+            raise Error(f"Domain '{domain_name}' not found")
 
         return DomainObject(domain)
 
@@ -241,8 +243,7 @@ class Cloudflare:
         rule = self.error.handle(r.json(), ["result", 0])
 
         if not rule:
-            print(f"Rule '{rule_name}' not found")
-            return
+            return Error(f"Rule '{rule_name}' not found")
 
         return RuleObject(rule)
 
@@ -320,6 +321,9 @@ class Cloudflare:
 
         header, expression = self.utils.read_expression(rule_file)
 
+        if expression is None:
+            return Error(f"No such file in folder '{self.utils.directory}'")
+
         new_rule = [{
             "description": rule_name,
             "filter": {
@@ -365,6 +369,9 @@ class Cloudflare:
             return {"error": "Rule not found"}
 
         header, expression = self.utils.read_expression(rule_file)
+
+        if expression is None:
+            return Error(f"No such file in folder '{self.utils.directory}'")
 
         if header:
             if "action" in header:
@@ -418,7 +425,8 @@ class Cloudflare:
     def import_rules(self, domain_name: str, actions_all: str = None) -> bool:
         """Import all expressions from all txt file
 
-        * actions_all -> Set the same action for all imported rules, please refer to https://developers.cloudflare.com/firewall/cf-firewall-rules/actions/
+        * actions_all -> Set the same action for all imported rules, \
+        please refer to https://developers.cloudflare.com/firewall/cf-firewall-rules/actions/
 
         Available actions as string:
         `block, challenge, js_challenge, managed_challenge, allow, log, bypass`
@@ -444,16 +452,16 @@ class Cloudflare:
                 name = self.utils.unescape(file.split(".")[0])
                 if not name in rules:
                     if self.active_rules < self.max_rules:
-                        print("Creating rule:", name)
                         if actions_all:
                             self.create_rule(domain_name, name, name, actions_all)
                         else:
                             self.create_rule(domain_name, name, name)
                         self.active_rules += 1
                     else:
-                        print("Cannot create more rules ({} used / {} available)".format(self.active_rules, self.max_rules))
-                        print("If you have a better plan, please register the domain plan using cf.set_plan(\"<your-domain>\")")
-                        break
+                        return Error("Cannot create more rules ({} used / {} available)"
+                                     "If you have a better plan, please register the domain plan"
+                                     "using cf.set_plan(\"<your-domain>\")"
+                                     .format(self.active_rules, self.max_rules))
 
         return True
 
