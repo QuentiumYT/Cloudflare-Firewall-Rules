@@ -34,7 +34,7 @@ setup(
     long_description=README,
     long_description_content_type="text/markdown",
     packages=["cf_rules"],
-    py_modules=["cf_rules.cf", "cf_rules.utils"],
+    py_modules=["cf_rules.cf", "cf_rules.utils", "cf_rules.error"],
     zip_safe=False,
     include_package_data=True,
     platforms="any",

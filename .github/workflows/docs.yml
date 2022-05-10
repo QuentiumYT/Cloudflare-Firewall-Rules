@@ -6,6 +6,7 @@ on:
       - "docs/**"
       - "cf_rules/cf.py"
       - "cf_rules/utils.py"
+      - "cf_rules/error.py"
 
 jobs:
   docs:

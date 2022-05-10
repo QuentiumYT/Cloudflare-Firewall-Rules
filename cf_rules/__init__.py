@@ -14,5 +14,6 @@ __all__ = (
     "Error",
 )
 
-from cf_rules.cf import Cloudflare
-from cf_rules.utils import Utils, Error
+from .cf import Cloudflare
+from .utils import Utils
+from .error import Error
