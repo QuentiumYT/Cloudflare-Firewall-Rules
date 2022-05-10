@@ -307,6 +307,8 @@ class Cloudflare:
         Available actions as string:
         `block, challenge, js_challenge, managed_challenge, allow, log, bypass`
 
+        Action is read from the header of the file by default, but you can specify it manually
+
         >>> cf.create_rule("example.com", "Second Test", "Test2")
         # Create a rule with the expression in "Test2.txt", will use the action in the header if specified
         >>> cf.create_rule("example.com", "Second Test", "Test2", "managed_challenge")
@@ -327,6 +329,8 @@ class Cloudflare:
         if header:
             if action or "action" in header:
                 new_rule[0]["action"] = action if action else header["action"]
+            else:
+                new_rule[0]["action"] = "managed_challenge"
             if "paused" in header:
                 new_rule[0]["paused"] = header["paused"]
             if "priority" in header:
