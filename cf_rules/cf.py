@@ -136,7 +136,7 @@ class Cloudflare:
         Better handling compared to :func:`get_domains`, return directly the result key of the function
 
         >>> cf.domains
-        >>> [{"id": "123", "name": "example.com", ...}, {"id": "456", "name": "example.net", ...}]
+        >>> [{"id": "123", "name": "example.com", ...}, {"id": "456", "name": "example.com", ...}]
         """
 
         return [DomainObject(x) for x in self.get_domains()["result"]]
@@ -362,11 +362,11 @@ class Cloudflare:
 
         rule = self.get_rule(domain_name, rule_name)
 
-        if rule:
+        if isinstance(rule, dict):
             updated_rule = rule.copy()
             rule_id = updated_rule["id"]
         else:
-            return {"error": "Rule not found"}
+            return rule
 
         header, expression = self.utils.read_expression(rule_file)
 
@@ -398,10 +398,10 @@ class Cloudflare:
 
         rule = self.get_rule(domain_name, rule_name)
 
-        if rule:
+        if isinstance(rule, dict):
             rule_id = rule["id"]
         else:
-            return {"error": "Rule not found"}
+            return rule
 
         r = requests.delete(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules/{rule_id}", headers=self._headers)
 
