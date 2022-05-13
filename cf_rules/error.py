@@ -23,13 +23,22 @@ class Error:
 
         >>> error = Error("My famous error message")
         >>> str(error)
-        >>> "Test"
+        >>> "My famous error message"
         """
 
         if hasattr(self, "message"):
-            return self.message["error"]
+            return self.message.get("error")
 
         return "Unknown error"
+
+    def __repr__(self) -> str:
+        return "'" + self.__str__() + "'"
+
+    def __bool__(self) -> bool:
+        return True if hasattr(self, "message") else False
+
+    def __getitem__(self, key):
+        return self.message.get(key)
 
     def handle(self, request_json: dict, keys: list[str | int]) -> any:
         """Handle errors from a request response
@@ -42,12 +51,12 @@ class Error:
         >>> error.handle({"success": False, "errors": [{"code": "invalid_parameter", "message": "Invalid parameter"}]}, ["success"])
         >>> False
 
-        >>> error.handle({"success": False, "errors": [{"code": 9109, "message": "Invalid access token"}], "messages": [], "result": None})
+        >>> error.handle({"success": False, "errors": [{"code": 9109, "message": "Invalid access token"}], "messages": [], "result": None}, ["errors"][0]["message"])
         >>> "Invalid access token"
         """
 
         if request_json["errors"]:
-            # Authentication error, Invalid access token
+            # Authentication error OR Invalid access token
             if any(x == request_json["errors"][0]["code"] for x in [10000, 9109]):
                 raise SystemExit(request_json["errors"][0]["message"])
 
