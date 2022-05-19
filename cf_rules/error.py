@@ -1,6 +1,6 @@
 from .utils import Utils
 
-class Error:
+class Error(Exception):
     def __init__(self, message: str | None = None) -> "Error":
         """Error class to handle Cloudflare errors
 
