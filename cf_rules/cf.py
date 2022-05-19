@@ -238,6 +238,8 @@ class Cloudflare:
         zone = self.get_domain(domain_name)
         zone_id = zone["id"]
 
+        rule_name = rule_name.replace("+", "%2B")
+
         r = requests.get(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules?description={rule_name}", headers=self._headers)
 
         rule = self.error.handle(r.json(), ["result", 0])
