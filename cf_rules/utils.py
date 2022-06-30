@@ -113,7 +113,7 @@ class Utils:
 
         return header
 
-    def get_json_key(self, json: dict, keys: list[str | int]) -> dict | bool:
+    def get_json_key(self, json: dict, keys: list[str | int]) -> any:
         """Get an element from a json using a list of keys
 
         >>> utils.get_json_key({"a": {"b": {"c": "d"}}}, ["a", "b", "c"])

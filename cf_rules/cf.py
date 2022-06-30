@@ -31,7 +31,7 @@ class Cloudflare:
         self.max_rules = 5
         self.active_rules = 0
 
-    def auth_key(self, email: str, key: str) -> dict:
+    def auth_key(self, email: str, key: str) -> dict | Error:
         """Get your global API Key through cloudflare profile (API Keys section)
 
         .. warning::
@@ -66,7 +66,7 @@ class Cloudflare:
 
     auth = auth_key
 
-    def auth_token(self, bearer_token: str) -> dict:
+    def auth_token(self, bearer_token: str) -> dict | Error:
         """Generate a specific token through cloudflare profile (API Tokens section)
 
         .. note::
@@ -106,7 +106,7 @@ class Cloudflare:
 
         return expression.replace(" or ", " or\n").replace(" and ", " and\n")
 
-    def get_domains(self: str) -> dict:
+    def get_domains(self: str) -> dict | Error:
         """Get all domains
 
         >>> cf.get_domains()
@@ -136,12 +136,12 @@ class Cloudflare:
         Better handling compared to :func:`get_domains`, return directly the result key of the function
 
         >>> cf.domains
-        >>> [{"id": "123", "name": "example.com", ...}, {"id": "456", "name": "example.com", ...}]
+        >>> [{"id": "123", "name": "example.com", ...}, {"id": "456", "name": "example.net", ...}]
         """
 
         return [DomainObject(x) for x in self.get_domains()["result"]]
 
-    def get_domain(self, domain_name: str) -> DomainObject:
+    def get_domain(self, domain_name: str) -> DomainObject | Error:
         """Get a specific domain as :class:`DomainObject`
 
         :exception Error: If domain is not found (list all domains using cf.domains)
@@ -228,7 +228,7 @@ class Cloudflare:
 
         return [RuleObject(x) for x in self.get_rules(domain_name)["result"]]
 
-    def get_rule(self, domain_name: str, rule_name: str) -> RuleObject:
+    def get_rule(self, domain_name: str, rule_name: str) -> RuleObject | Error:
         """Get a specific rule from a specific domain as :class:`RuleObject`
 
         >>> cf.get_rule("example.com", "Bad Bots")
@@ -303,7 +303,7 @@ class Cloudflare:
 
         return True
 
-    def create_rule(self, domain_name: str, rule_name: str, rule_file: str, action: str = None) -> bool:
+    def create_rule(self, domain_name: str, rule_name: str, rule_file: str, action: str = None) -> bool | Error:
         """Create a rule with a specific expression
 
         * action -> Please refer to https://developers.cloudflare.com/firewall/cf-firewall-rules/actions/
@@ -323,7 +323,7 @@ class Cloudflare:
 
         header, expression = self.utils.read_expression(rule_file)
 
-        if expression is None:
+        if not expression:
             return Error(f"No such file in folder '{self.utils.directory}'")
 
         new_rule = [{
@@ -350,7 +350,7 @@ class Cloudflare:
 
         return self.error.handle(r.json(), ["success"])
 
-    def update_rule(self, domain_name: str, rule_name: str, rule_file: str) -> bool:
+    def update_rule(self, domain_name: str, rule_name: str, rule_file: str) -> bool | Error:
         """Update a rule with a specific expression
 
         .. todo::
@@ -372,7 +372,7 @@ class Cloudflare:
 
         header, expression = self.utils.read_expression(rule_file)
 
-        if expression is None:
+        if not expression:
             return Error(f"No such file in folder '{self.utils.directory}'")
 
         if header:
@@ -424,7 +424,7 @@ class Cloudflare:
 
         return True
 
-    def import_rules(self, domain_name: str, actions_all: str = None) -> bool:
+    def import_rules(self, domain_name: str, actions_all: str = None) -> bool | Error:
         """Import all expressions from all txt file
 
         * actions_all -> Set the same action for all imported rules, \
