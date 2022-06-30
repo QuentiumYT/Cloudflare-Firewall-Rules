@@ -2,6 +2,10 @@ name: Make HTML docs
 
 on:
   push:
+    branches:
+      - "main"
+    tags:
+      - "*"
     paths:
       - "docs/**"
       - "cf_rules/cf.py"
