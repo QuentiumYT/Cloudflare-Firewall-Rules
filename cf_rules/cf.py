@@ -264,7 +264,7 @@ class Cloudflare:
         for rule in rules["result"]:
             header = {
                 "action": rule["action"],
-                "paused": rule["paused"]
+                "paused": rule["paused"],
             }
             if "priority" in rule:
                 header["priority"] = rule["priority"]
@@ -287,16 +287,20 @@ class Cloudflare:
 
         rule = self.get_rule(domain_name, rule_name)
 
+        if isinstance(rule, Error):
+            return rule
+
+        rule_name = rule["description"]
         if custom_name:
             rule_name = custom_name
-        else:
-            rule_name = rule["description"]
 
         header = {
             "action": rule["action"],
             "paused": rule["paused"],
-            "priority": rule["priority"]
         }
+        if "priority" in rule:
+            header["priority"] = rule["priority"]
+
         rule_expression = self.beautify(rule["filter"]["expression"])
 
         self.utils.write_expression(rule_name, rule_expression, header=header)
