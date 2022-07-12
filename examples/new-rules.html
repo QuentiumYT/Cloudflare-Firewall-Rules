@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New clean rules script &mdash; Cloudflare Firewall Rules  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Update rules script" href="update-rules.html" />
+    <link rel="prev" title="List rules script" href="list-rules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Cloudflare Firewall Rules
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                1.3.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Cloudflare’s Firewall Rules documentation!</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cf.html">cf_rules module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Classes:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../classes/Cloudflare.html">Cloudflare</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes/Error.html">Error</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../classes/Utils.html">Utils</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="create-rules.html">Create rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list-domains.html">List domains script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="list-rules.html">List rules script</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">New clean rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="update-rules.html">Update rules script</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cloudflare Firewall Rules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>New clean rules script</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/QuentiumYT/Cloudflare-Firewall-Rules/blob/main/docs/examples/new-rules.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="new-clean-rules-script">
+<h1>New clean rules script<a class="headerlink" href="#new-clean-rules-script" title="Permalink to this heading"></a></h1>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">This script is an example of a purge to replace all existing rules with new ones.</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># If you want to run this script, move it one folder above (next to cf.py)</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">dotenv</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="kn">from</span> <span class="nn">cf_rules</span> <span class="kn">import</span> <span class="n">Cloudflare</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="n">dotenv</span><span class="o">.</span><span class="n">load_dotenv</span><span class="p">(</span><span class="s2">&quot;.env&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="n">cf</span> <span class="o">=</span> <span class="n">Cloudflare</span><span class="p">(</span><span class="s2">&quot;expressions&quot;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">cf</span><span class="o">.</span><span class="n">auth</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;EMAIL&quot;</span><span class="p">),</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;KEY&quot;</span><span class="p">))</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="c1"># TODO Have some rules in the expressions folder</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="c1"># First delete all existing rules</span>
+<span class="linenos">15</span><span class="n">cf</span><span class="o">.</span><span class="n">purge_rules</span><span class="p">(</span><span class="s2">&quot;main-domain.com&quot;</span><span class="p">)</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="c1"># Then import all the rules from your expressions folder</span>
+<span class="linenos">18</span><span class="n">cf</span><span class="o">.</span><span class="n">import_rules</span><span class="p">(</span><span class="s2">&quot;main-domain.com&quot;</span><span class="p">,</span> <span class="s2">&quot;block&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>This script is cleaning all the rules from a domain.
+It is used if you want to replicate the rules from a domain to another one.</p>
+<p>Be careful when using <code class="xref py py-func docutils literal notranslate"><span class="pre">cf.Cloudflare.purge_rules()</span></code> method.</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="list-rules.html" class="btn btn-neutral float-left" title="List rules script" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="update-rules.html" class="btn btn-neutral float-right" title="Update rules script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Quentin L.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
