@@ -71,10 +71,14 @@ class Utils:
 
         if os.path.isfile(filename):
             with open(filename, "r") as file:
-                header = self.process_header(file.readline().strip())
+                first_line = file.readline().strip()
+                header = self.process_header(first_line)
 
                 expression = [x.strip() for x in file.readlines()
                               if not x.strip().startswith("#")]
+
+                if not header:
+                    expression.insert(0, first_line)
         else:
             print(f"No such file in folder '{self.directory}'")
             return None, None
