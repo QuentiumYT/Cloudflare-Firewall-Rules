@@ -167,6 +167,9 @@ class Cloudflare:
         if not domain:
             raise Error(f"Domain '{domain_name}' not found")
 
+        if "error" in domain:
+            raise Error(domain["error"])
+
         return DomainObject(domain)
 
     def set_plan(self, domain_name: str) -> True:
