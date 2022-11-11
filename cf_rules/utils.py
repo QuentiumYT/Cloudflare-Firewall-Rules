@@ -7,7 +7,7 @@ class Utils:
         >>> utils = Utils("my_expressions")
         """
 
-        self.directory = directory if directory else "expressions"
+        self.directory = directory or "expressions"
 
         if not os.path.isdir(self.directory):
             os.mkdir(self.directory)
@@ -95,7 +95,7 @@ class Utils:
 
         if header_line.startswith("#!") and header_line.endswith("!#"):
             header_data = header_line[2:-2].strip()
-            header = {x: y for x, y in [x.split(":") for x in header_data.split(" ")]}
+            header = dict([x.split(":") for x in header_data.split(" ")])
 
             if "action" in header:
                 # List of all available actions for Cloudflare
@@ -106,7 +106,7 @@ class Utils:
                     print("The action in the header is not valid, ignoring it...")
                     print("List of available actions: " + ", ".join(available_actions))
             if "paused" in header:
-                header["paused"] = False if header["paused"].lower() == "false" else True
+                header["paused"] = header["paused"].lower() != "false"
             if "priority" in header:
                 if header["priority"].isdigit():
                     header["priority"] = int(header["priority"])
@@ -117,7 +117,7 @@ class Utils:
 
         return header
 
-    def get_json_key(self, json: dict, keys: list[str | int]) -> any:
+    def get_json_key(self, json: dict, keys: list[str | int]) -> object:
         """Get an element from a json using a list of keys
 
         >>> utils.get_json_key({"a": {"b": {"c": "d"}}}, ["a", "b", "c"])
@@ -130,12 +130,8 @@ class Utils:
             if isinstance(key, str):
                 if key in json:
                     json = json[key]
-                else:
-                    return False
             elif isinstance(key, int):
                 if len(json) > key:
                     json = json[key]
-                else:
-                    return False
 
         return json

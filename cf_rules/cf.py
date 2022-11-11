@@ -279,7 +279,7 @@ class Cloudflare:
         return True
 
     def export_rule(self, domain_name: str, rule_name: str, custom_name: str = None) -> True:
-        """Export the expression of a rule in a txt file    
+        """Export the expression of a rule in a txt file
 
         .. note::
             Will save the expression into a file in the folder specified in the constructor
@@ -293,9 +293,7 @@ class Cloudflare:
         if isinstance(rule, Error):
             return rule
 
-        rule_name = rule["description"]
-        if custom_name:
-            rule_name = custom_name
+        rule_name = custom_name or rule["description"]
 
         header = {
             "action": rule["action"],
@@ -342,7 +340,7 @@ class Cloudflare:
 
         if header:
             if action or "action" in header:
-                new_rule[0]["action"] = action if action else header["action"]
+                new_rule[0]["action"] = action or header["action"]
             else:
                 new_rule[0]["action"] = "managed_challenge"
             if "paused" in header:
@@ -350,7 +348,7 @@ class Cloudflare:
             if "priority" in header:
                 new_rule[0]["priority"] = header["priority"]
         else:
-            new_rule[0]["action"] = action if action else "managed_challenge"
+            new_rule[0]["action"] = action or "managed_challenge"
 
         if self.active_rules < self.max_rules:
             r = requests.post(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/firewall/rules", headers=self._headers, json=new_rule)
@@ -371,11 +369,11 @@ class Cloudflare:
 
         rule = self.get_rule(domain_name, rule_name)
 
-        if isinstance(rule, dict):
-            updated_rule = rule.copy()
-            rule_id = updated_rule["id"]
-        else:
+        if not isinstance(rule, dict):
             return rule
+
+        updated_rule = rule.copy()
+        rule_id = updated_rule["id"]
 
         header, expression = self.utils.read_expression(rule_file)
 
@@ -459,7 +457,7 @@ class Cloudflare:
         for file in files:
             if file.endswith(".txt"):
                 name = self.utils.unescape(file.split(".")[0])
-                if not name in rules:
+                if name not in rules:
                     if self.active_rules < self.max_rules:
                         if actions_all:
                             self.create_rule(domain_name, name, name, actions_all)

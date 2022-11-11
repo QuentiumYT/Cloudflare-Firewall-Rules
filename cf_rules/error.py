@@ -35,7 +35,7 @@ class Error(Exception):
         return "'" + self.__str__() + "'"
 
     def __bool__(self) -> bool:
-        return True if hasattr(self, "message") else False
+        return hasattr(self, "message")
 
     def __getitem__(self, key):
         return self.message.get(key)
@@ -57,7 +57,7 @@ class Error(Exception):
 
         if request_json["errors"]:
             # Authentication error OR Invalid access token
-            if any(x == request_json["errors"][0]["code"] for x in [10000, 9109]):
+            if request_json["errors"][0]["code"] in [10000, 9109]:
                 raise SystemExit(request_json["errors"][0]["message"])
 
         if request_json["success"]:
