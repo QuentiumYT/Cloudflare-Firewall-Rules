@@ -1,5 +1,3 @@
-from .utils import Utils
-
 class Error(Exception):
     def __init__(self, message: str | None = None) -> "Error":
         """Error class to handle Cloudflare errors
@@ -9,12 +7,10 @@ class Error(Exception):
         >>> error = Error("This is an error message")
         """
 
-        self.utils = Utils()
-
         if message:
             self.message = {
                 "success": False,
-                "error": message
+                "error": message,
             }
 
     def __str__(self) -> str:
@@ -43,7 +39,7 @@ class Error(Exception):
     def handle(self, request_json: dict, keys: list[str | int]) -> any:
         """Handle errors from a request response
 
-        :exception SystemExit: If auth error
+        :exception Error: If auth error
 
         >>> error.handle({"success": True, "result": {"a": "b"}}, ["success"])
         >>> True
@@ -55,12 +51,24 @@ class Error(Exception):
         >>> "Invalid access token"
         """
 
-        if request_json["errors"]:
-            # Authentication error OR Invalid access token
-            if request_json["errors"][0]["code"] in [10000, 9109]:
-                raise SystemExit(request_json["errors"][0]["message"])
+        if request_json.get("success"):
+            # pylint: disable=import-outside-toplevel
+            from .utils import Utils
 
-        if request_json["success"]:
-            return self.utils.get_json_key(request_json, keys)
-        else:
-            return {"error": self.utils.get_json_key(request_json, ["errors", 0, "message"])}
+            return Utils.get_json_key(request_json, keys)
+
+        if request_json.get("errors"):
+            messages = []
+            for error in request_json.get("errors"):
+                main_msg = error.get("message")
+                if error.get("error_chain"):
+                    messages.extend(
+                        main_msg + " -> " + error_chain.get("message")
+                        for error_chain in error.get("error_chain")
+                    )
+                else:
+                    messages.append(main_msg)
+
+            raise Error("\n".join(messages))
+
+        raise Error(str(request_json))
