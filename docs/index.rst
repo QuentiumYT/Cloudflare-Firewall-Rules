@@ -35,7 +35,7 @@ Installation:
     from cf_rules import Cloudflare
 
     cf = Cloudflare()
-    cf.auth(email, password)
+    cf.auth_key(email, password)
 
     ...
 

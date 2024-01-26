@@ -67,11 +67,11 @@ Create any Python file in the cloned directory and paste these lines
 from cf_rules import Cloudflare
 
 cf = Cloudflare()
-cf.auth("cloudflare@example.com", "your-global-api-key")
+cf.auth_key("<your-address@email.com>", "<your-global-api-key>")
 # OR
-cf.auth_bearer("your-specific-bearer-token")
+cf.auth_token("<your-specific-bearer-token>")
 
-domains = cf.domains["domains"]
+domains = cf.domains[0].name
 
 print(domains)
 # >>> ['example.com']
