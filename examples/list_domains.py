@@ -1,14 +1,13 @@
-# If you want to run this script, move it one folder above (next to cf.py)
-
-import os, dotenv
+import os
 from datetime import datetime
 
+import dotenv
 from cf_rules import Cloudflare
 
 dotenv.load_dotenv(".env")
 
 cf = Cloudflare("my_expressions")
-cf.auth(os.environ.get("EMAIL"), os.environ.get("KEY"))
+cf.auth_key(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
 # Get domains
 
