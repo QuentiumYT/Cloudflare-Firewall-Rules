@@ -1,16 +1,10 @@
 name: Make HTML docs
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - "main"
     tags:
-      - "*"
-    paths:
-      - "docs/**"
-      - "cf_rules/cf.py"
-      - "cf_rules/utils.py"
-      - "cf_rules/error.py"
+      - "v*"
 
 jobs:
   docs:
@@ -18,24 +12,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          lfs: true
+        uses: actions/checkout@v4
       - name: Install Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.12"
       - name: Install dependencies
         run: |
           python -m pip install -U pip
-          pip install -U sphinx sphinx-rtd-theme sphinx-copybutton
+          python -m pip install -r requirements.txt
       - name: Sphinx problems report
-        uses: ammaraskar/sphinx-problem-matcher@master
+        uses: ammaraskar/sphinx-problem-matcher@v1
       - name: Build Sphinx docs
         run: |
           cd docs/
-          make html
+          TZ=UTC make html
           sed -i 's/url_root="#"/url_root=""/' _build/html/index.html || true
       - name: Commit documentation changes
         run: |
@@ -47,8 +38,8 @@ jobs:
           rm -rf __pycache__/ _sources/ docs/
           touch .nojekyll
           git add .
-          git commit -m "Update documentation" -a || true
-      - name: Push changes
+          git commit -a -m "Update documentation"
+      - name: Deploy pages
         uses: ad-m/github-push-action@master
         with:
           branch: gh-pages
