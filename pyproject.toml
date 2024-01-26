@@ -6,7 +6,7 @@ keywords = ["api", "rules", "wrapper", "library", "firewall", "waf", "cloudflare
 license = {file = "LICENSE"}
 authors = [{name = "Quentin Lienhardt", email = "pro@quentium.fr" }]
 classifiers = [
-"Development Status :: 3 - Production/Stable",
+"Development Status :: 5 - Production/Stable",
 "Environment :: Web Environment",
 "Intended Audience :: Developers",
 "License :: OSI Approved :: Apache Software License",
