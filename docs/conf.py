@@ -19,9 +19,9 @@ from cf_rules import __version__ # noqa: E402
 
 # -- Project information -----------------------------------------------------
 
-project = 'Cloudflare Firewall Rules'
-copyright = '2022, Quentin L'
-author = 'Quentin L'
+project = 'Cloudflare WAF Custom rules'
+copyright = '2024, Quentin Lienhardt'
+author = 'Quentin Lienhardt'
 version = __version__
 
 # -- General configuration ---------------------------------------------------

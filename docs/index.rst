@@ -1,6 +1,6 @@
-*****************************************************
-Welcome to Cloudflare's Firewall Rules documentation!
-*****************************************************
+*******************************************************
+Welcome to Cloudflare's WAF Custom rules documentation!
+*******************************************************
 
 .. currentmodule:: cf
 
@@ -10,7 +10,7 @@ Welcome to Cloudflare's Firewall Rules documentation!
 
     self
 
-Cloudflare Firewall Rules is a wrapper library that aims to easily create, modify, delete rules. It also provides a way to import & export new rules in your domain's firewall.
+This library is a wrapper that aims to easily create, modify, delete rules. It also provides a way to import & export new rules in your domain's firewall.
 
 If you have a single rule that you want to duplicate among your domains, you can simply write 3 lines to do that :)
 (See examples for more info)
