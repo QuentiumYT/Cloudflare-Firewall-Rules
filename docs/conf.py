@@ -13,7 +13,7 @@
 # pylint: disable=wrong-import-position
 import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('..') + os.path.sep + 'src')
 
 from cf_rules import __version__ # noqa: E402
 
