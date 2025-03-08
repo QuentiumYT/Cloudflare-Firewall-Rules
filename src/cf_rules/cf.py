@@ -430,7 +430,7 @@ class Cloudflare:
         if not expression:
             raise Error(f"No such file in folder '{self.utils.directory}'")
 
-        if rule_file.strip(".txt") in rules["rules"]:
+        if rule_name in rules["rules"]:
             raise Error(f"Rule '{rule_file.strip('.txt')}' already exists")
 
         new_rule = {
