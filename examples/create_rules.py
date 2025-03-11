@@ -18,7 +18,7 @@ domains = cf.domains # List of domains as objects
 for domain in domains:
     # WARNING If you have a better plan (pro, business or enterprise), don't forget to set your plan
     # It will increase your rules limit for the import_rule method
-    cf.set_plan(domain)
+    cf.set_plan(domain.name)
     # import_rule is an alias of create_rule
     c = cf.import_rule(domain, local_rule_file, remote_rule_name, "block")
     print(c)
