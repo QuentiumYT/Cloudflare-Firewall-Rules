@@ -398,7 +398,7 @@ class Cloudflare:
 
         return True
 
-    def create_rule(self, domain_name: str, rule_file: str, rule_name: str | None = None, action: str | None = None) -> bool:
+    def create_rule(self, domain_name: str, rule_file: str, rule_name: str | None = None, action: str | None = None, position: int | None = None) -> bool:
         """Create a rule with a specific expression
 
         * action -> Please refer to https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
@@ -407,6 +407,8 @@ class Cloudflare:
         `managed_challenge, js_challenge, challenge, block, skip, log`
 
         Action is read from the header of the file by default, but you can specify it manually. Else it will be "managed_challenge"
+
+        * position -> Rule position, with 1 being the first rule in the list
 
         :exception Error: Rule file is not found
         :exception Error: Rule already exists in remote WAF
@@ -438,6 +440,9 @@ class Cloudflare:
             "expression": expression,
         }
 
+        if position:
+            new_rule["position"] = {"index": position}
+
         if header:
             if action or "action" in header:
                 new_rule["action"] = action or header["action"]
@@ -448,6 +453,17 @@ class Cloudflare:
         else:
             new_rule["action"] = action or "managed_challenge"
 
+        if new_rule["action"] == "skip":
+            new_rule["action_parameters"] = {
+                                                "phases": [
+                                                    "http_request_firewall_managed",
+                                                    "http_request_sbfm",
+                                                    "http_ratelimit"
+                                                ],
+                                                "products": [],
+                                                "ruleset": "current"
+                                            }
+
         if self.active_rules < self.max_rules:
             r = requests.post(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}/rules", headers=self._headers, json=new_rule, timeout=5)
         else:
@@ -456,7 +472,7 @@ class Cloudflare:
 
         return self.error.handle(r.json(), ["success"])
 
-    def update_rule(self, domain_name: str, rule_file: str, rule_name: str | None = None, action: str | None = None) -> bool:
+    def update_rule(self, domain_name: str, rule_file: str, rule_name: str | None = None, action: str | None = None, position: int | None = None) -> bool:
         """Update a rule with a specific expression
 
         :exception Error: Rule file is not found
@@ -464,7 +480,7 @@ class Cloudflare:
         .. todo::
             First modify "Bad Bots.txt" by changing the expression or adding a new rule
 
-
+        * position -> Rule position, starting from 1
 
         >>> cf.update_rule("example.com", "Bad Bots.txt")
         # Will update the remote rule "Bad Bots" with the expression in "Bad Bots.txt"
@@ -495,6 +511,20 @@ class Cloudflare:
                 updated_rule["action"] = action or header["action"]
             if "enabled" in header:
                 updated_rule["enabled"] = header["enabled"]
+
+        if position:
+            updated_rule["position"] = {"index": position}
+        
+        if updated_rule["action"] == "skip":
+            updated_rule["action_parameters"] = {
+                                                    "phases": [
+                                                        "http_request_firewall_managed",
+                                                        "http_request_sbfm",
+                                                        "http_ratelimit"
+                                                    ],
+                                                    "products": [],
+                                                    "ruleset": "current"
+                                                }
 
         updated_rule["expression"] = expression
 
