@@ -13,7 +13,7 @@ cf.auth_key(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
 rules = cf.get_rules("example.com")
 
-print(f"There are {rules['count']} domains available for your account:")
+print(f"There are {rules['count']} rules available for your account:")
 
 print(" ".join([x["description"] for x in rules["result"]]))
 
@@ -21,7 +21,7 @@ print(" ".join([x["description"] for x in rules["result"]]))
 
 rules = cf.rules("example.com")
 
-print(f"There are {len(rules)} domains available for your account:")
+print(f"There are {len(rules)} rules available for your account:")
 
 print(" ".join([x.description for x in rules]))
 

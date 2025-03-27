@@ -433,7 +433,7 @@ class Cloudflare:
             raise Error(f"No such file in folder '{self.utils.directory}'")
 
         if rule_name in rules["rules"]:
-            raise Error(f"Rule '{rule_file.strip('.txt')}' already exists")
+            raise Error(f"Rule '{rule_name}' already exists")
 
         new_rule = {
             "description": rule_name,
