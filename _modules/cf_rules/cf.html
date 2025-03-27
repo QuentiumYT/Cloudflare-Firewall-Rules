@@ -1,0 +1,847 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cf_rules.cf &mdash; Cloudflare WAF Custom rules  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b36e7c7d" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Cloudflare WAF Custom rules
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome to Cloudflare’s WAF Custom rules documentation!</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cf.html">cf_rules module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Classes:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../classes/Cloudflare.html">Cloudflare</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare"><code class="docutils literal notranslate"><span class="pre">Cloudflare</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.__init__"><code class="docutils literal notranslate"><span class="pre">Cloudflare.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.auth_key"><code class="docutils literal notranslate"><span class="pre">Cloudflare.auth_key()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.auth_token"><code class="docutils literal notranslate"><span class="pre">Cloudflare.auth_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_domains"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_domains()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.domains"><code class="docutils literal notranslate"><span class="pre">Cloudflare.domains</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_domain"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_domain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.set_plan"><code class="docutils literal notranslate"><span class="pre">Cloudflare.set_plan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_rulesets"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_rulesets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.rulesets"><code class="docutils literal notranslate"><span class="pre">Cloudflare.rulesets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_custom_ruleset"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_custom_ruleset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.export_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.export_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.export_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.export_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.create_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.create_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.update_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.update_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.delete_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.delete_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.purge_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.purge_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.import_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.import_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.import_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.import_rule()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../classes/Error.html">Error</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classes/Error.html#cf_rules.Error"><code class="docutils literal notranslate"><span class="pre">Error</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Error.html#cf_rules.Error.__init__"><code class="docutils literal notranslate"><span class="pre">Error.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Error.html#cf_rules.Error.handle"><code class="docutils literal notranslate"><span class="pre">Error.handle()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../classes/Utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.__init__"><code class="docutils literal notranslate"><span class="pre">Utils.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.change_directory"><code class="docutils literal notranslate"><span class="pre">Utils.change_directory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.escape"><code class="docutils literal notranslate"><span class="pre">Utils.escape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.unescape"><code class="docutils literal notranslate"><span class="pre">Utils.unescape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.beautify"><code class="docutils literal notranslate"><span class="pre">Utils.beautify()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.write_expression"><code class="docutils literal notranslate"><span class="pre">Utils.write_expression()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.read_expression"><code class="docutils literal notranslate"><span class="pre">Utils.read_expression()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.process_header"><code class="docutils literal notranslate"><span class="pre">Utils.process_header()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.get_json_key"><code class="docutils literal notranslate"><span class="pre">Utils.get_json_key()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/create-rules.html">Create rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/list-domains.html">List domains script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/list-rules.html">List rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/new-rules.html">New clean rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/update-rules.html">Update rules script</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cloudflare WAF Custom rules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cf_rules.cf</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cf_rules.cf</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.error</span><span class="w"> </span><span class="kn">import</span> <span class="n">Error</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Utils</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DomainObject</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DomainObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="bp">self</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RuleObject</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RuleObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="bp">self</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RulesetObject</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RulesetObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="bp">self</span>
+
+
+<div class="viewcode-block" id="Cloudflare">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Cloudflare</span><span class="p">:</span>
+<div class="viewcode-block" id="Cloudflare.__init__">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize Cloudflare class</span>
+
+<span class="sd">        Specify a folder argument where expressions will be saved</span>
+
+<span class="sd">        &gt;&gt;&gt; cf = Cloudflare(&quot;my_expressions&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">utils</span> <span class="o">=</span> <span class="n">Utils</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error</span> <span class="o">=</span> <span class="n">Error</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">plan</span> <span class="o">=</span> <span class="s2">&quot;free&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_rules</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_rules</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.auth_key">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.auth_key">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">auth_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get your global API Key through cloudflare profile (API Keys section)</span>
+
+<span class="sd">        :exception Error: Email or key is not provided</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">            This will grant all domains access to this API library, prefer using :func:`auth_token`</span>
+
+<span class="sd">        https://dash.cloudflare.com/profile/api-tokens</span>
+
+<span class="sd">        * email -&gt; Email account</span>
+<span class="sd">        * key -&gt; Global API Key</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.auth_key(&quot;cloudflare@example.com&quot;, &quot;your-global-api-key&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;success&quot;: True, &quot;result&quot;: {&quot;id&quot;: &quot;a1b2c3&quot;, &quot;email&quot;: &quot;cloudflare@example.com&quot;, ...}}</span>
+<span class="sd">        # OR</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;success&quot;: False, &quot;errors&quot;: [{&quot;code&quot;: 6003, &quot;message&quot;: &quot;Invalid request headers&quot;, ...}]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;You must provide an email&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;You must provide an API key&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;X-Auth-Email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+            <span class="s2">&quot;X-Auth-Key&quot;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span>
+            <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.cloudflare.com/client/v4/user&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.auth_token">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.auth_token">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">auth_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bearer_token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a specific token through cloudflare profile (API Tokens section)</span>
+
+<span class="sd">        :exception Error: Bearer token is not provided</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            This will grant only specific domains/permissions related access to this API library</span>
+
+<span class="sd">        https://dash.cloudflare.com/profile/api-tokens</span>
+
+<span class="sd">        * bearer_token -&gt; API Token</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.auth_token(&quot;your-specific-bearer-token&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;success&quot;: True, &quot;result&quot;: {&quot;id&quot;: &quot;a1b2c3&quot;, &quot;status&quot;: &quot;active&quot;}, ...}</span>
+<span class="sd">        # OR</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;success&quot;: False, &quot;errors&quot;: [{&quot;code&quot;: 1000, &quot;message&quot;: &quot;Invalid API token&quot;}], ...}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">bearer_token</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;You must provide a bearer token&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_headers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer &quot;</span> <span class="o">+</span> <span class="n">bearer_token</span><span class="p">,</span>
+            <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.cloudflare.com/client/v4/user/tokens/verify&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.get_domains">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_domains">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_domains</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all domains</span>
+
+<span class="sd">        :exception Error: If not authenticated (use :func:`auth_key(email, key) &lt;auth_key&gt;` or :func:`auth_token(bearer_token) &lt;auth_token&gt;`)</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.get_domains()</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;count&quot;: 2, &quot;domains&quot;: [&quot;example.com&quot;, &quot;example.fr&quot;], &quot;result&quot;: [{&quot;id&quot;: &quot;a1b2c3&quot;, &quot;name&quot;: &quot;example.com&quot;, ...}, ...]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_headers&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer_token)&quot;</span><span class="p">)</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.cloudflare.com/client/v4/zones&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">zones</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">zones</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;No domain found&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">zones</span><span class="p">),</span>
+            <span class="s2">&quot;domains&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">zones</span><span class="p">],</span>
+            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">zones</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">domains</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">DomainObject</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all domains as a list of :class:`DomainObject`</span>
+
+<span class="sd">        Access any value of the object with the dot operator</span>
+
+<span class="sd">        Better handling compared to :func:`get_domains`, return directly the result key of the function</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.domains</span>
+<span class="sd">        &gt;&gt;&gt; [{&quot;id&quot;: &quot;a1b2c3&quot;, &quot;name&quot;: &quot;example.com&quot;, ...}, {&quot;id&quot;: &quot;d4e5f6&quot;, &quot;name&quot;: &quot;example.fr&quot;, ...}]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">DomainObject</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_domains</span><span class="p">()[</span><span class="s2">&quot;result&quot;</span><span class="p">]]</span>
+
+<div class="viewcode-block" id="Cloudflare.get_domain">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_domain">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DomainObject</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a specific domain as :class:`DomainObject`</span>
+
+<span class="sd">        :exception Error: If not authenticated (use :func:`auth_key(email, key) &lt;auth_key&gt;` or :func:`auth_token(bearer_token) &lt;auth_token&gt;`)</span>
+<span class="sd">        :exception Error: If domain is not found (list all domains using cf.domains)</span>
+
+<span class="sd">        .. important::</span>
+<span class="sd">            This function is the &quot;core&quot; for all other functions,</span>
+<span class="sd">            it is needed for every other function to work</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.get_domain(&quot;example.com&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;id&quot;: &quot;a1b2c3&quot;, &quot;name&quot;: &quot;example.com&quot;, ...}</span>
+<span class="sd">        &gt;&gt;&gt; domain = cf.get_domain(&quot;example.fr&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; domain.name # OR domain[&quot;name&quot;]</span>
+<span class="sd">        &gt;&gt;&gt; &quot;example.fr&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_headers&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer_token)&quot;</span><span class="p">)</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.cloudflare.com/client/v4/zones?name=</span><span class="si">{</span><span class="n">domain_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">domain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Domain &#39;</span><span class="si">{</span><span class="n">domain_name</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">domain</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">domain</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">DomainObject</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.set_plan">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.set_plan">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save current website plan</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Will define the current plan of the website in the instance of the class</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.set_plan(&quot;example.com&quot;)</span>
+<span class="sd">        # Now the maximum available rules for this domain depends on the current plan</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">plan</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_domain</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)[</span><span class="s2">&quot;plan&quot;</span><span class="p">][</span><span class="s2">&quot;legacy_id&quot;</span><span class="p">]</span>
+
+        <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">plan</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;free&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">max_rules</span> <span class="o">=</span> <span class="mi">5</span>
+            <span class="k">case</span> <span class="s2">&quot;pro&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">max_rules</span> <span class="o">=</span> <span class="mi">20</span>
+            <span class="k">case</span> <span class="s2">&quot;business&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">max_rules</span> <span class="o">=</span> <span class="mi">100</span>
+            <span class="k">case</span> <span class="s2">&quot;enterprise&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">max_rules</span> <span class="o">=</span> <span class="mi">1000</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.get_rulesets">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_rulesets">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_rulesets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all rulesets from a specific domain</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.get_rulesets(&quot;example.com&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;count&quot;: 4, &quot;rulesets&quot;: [&quot;default&quot;, &quot;Cloudflare Normalization Ruleset&quot;, ...], &quot;result&quot;: [{&quot;id&quot;: &quot;a1b2c3&quot;, &quot;name&quot;: &quot;default&quot;, ...}]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">zone</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_domain</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)</span>
+        <span class="n">zone_id</span> <span class="o">=</span> <span class="n">zone</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.cloudflare.com/client/v4/zones/</span><span class="si">{</span><span class="n">zone_id</span><span class="si">}</span><span class="s2">/rulesets&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">rulesets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;zone_id&quot;</span><span class="p">:</span> <span class="n">zone_id</span><span class="p">,</span>
+            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">rulesets</span><span class="p">),</span>
+            <span class="s2">&quot;rulesets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rulesets</span><span class="p">],</span>
+            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">rulesets</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.rulesets">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.rulesets">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rulesets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">RulesetObject</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all rulesets as a list of :class:`RulesetObject`</span>
+
+<span class="sd">        Access any value of the object with the dot operator</span>
+
+<span class="sd">        Better handling compared to :func:`get_rulesets()`, return directly the result key of the function</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.rulesets</span>
+<span class="sd">        &gt;&gt;&gt; [{&quot;id&quot;: &quot;a1b2c3&quot;, &quot;name&quot;: &quot;default&quot;, ...}, {&quot;id&quot;: &quot;d4e5f6&quot;, &quot;name&quot;: &quot;Cloudflare Normalization Ruleset&quot;, ...}]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">RulesetObject</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rulesets</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)[</span><span class="s2">&quot;result&quot;</span><span class="p">]]</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.get_custom_ruleset">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_custom_ruleset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_custom_ruleset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RulesetObject</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the custom ruleset from a specific domain as :class:`RulesetObject`</span>
+
+<span class="sd">        It should be the only ruleset with the source &quot;firewall_custom&quot; as per Cloudflare&#39;s documentation.</span>
+<span class="sd">        This is the ruleset where all custom rules are stored.</span>
+
+<span class="sd">        :exception Error: If no custom ruleset is found</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.get_custom_ruleset(&quot;example.com&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;id&quot;: &quot;a1b2c3&quot;, &quot;name&quot;: &quot;default&quot;, &quot;source&quot;: &quot;firewall_custom&quot;, ...}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">rulesets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rulesets</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)</span>
+
+        <span class="n">custom_ruleset</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rulesets</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;firewall_custom&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">custom_ruleset</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;No custom ruleset found&quot;</span><span class="p">)</span>
+
+        <span class="n">custom_ruleset</span> <span class="o">=</span> <span class="n">custom_ruleset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">custom_ruleset</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">custom_ruleset</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">])</span>
+
+        <span class="n">custom_ruleset</span><span class="p">[</span><span class="s2">&quot;zone_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rulesets</span><span class="p">[</span><span class="s2">&quot;zone_id&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">RulesetObject</span><span class="p">(</span><span class="n">custom_ruleset</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.get_rules">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_rules">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all rules from a specific domain</span>
+
+<span class="sd">        :exception Error: If no rules are found</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.get_rules(&quot;example.com&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;count&quot;: 3, &quot;rules&quot;: [&quot;Bad Bots&quot;, &quot;Bad IP&quot;, &quot;Bad AS&quot;], &quot;result&quot;: [{&quot;id&quot;: &quot;a1b2c3&quot;, &quot;description&quot;: &quot;Bad Bots&quot;, ...}, ...]}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ruleset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_custom_ruleset</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)</span>
+        <span class="n">zone_id</span> <span class="o">=</span> <span class="n">ruleset</span><span class="p">[</span><span class="s2">&quot;zone_id&quot;</span><span class="p">]</span>
+        <span class="n">custom_ruleset_id</span> <span class="o">=</span> <span class="n">ruleset</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.cloudflare.com/client/v4/zones/</span><span class="si">{</span><span class="n">zone_id</span><span class="si">}</span><span class="s2">/rulesets/</span><span class="si">{</span><span class="n">custom_ruleset_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="n">rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="s2">&quot;rules&quot;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rules</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;No rules found&quot;</span><span class="p">)</span>
+
+        <span class="c1"># No rules found (handle silently fails), return empty list</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rules</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">rules</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_rules</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;zone_id&quot;</span><span class="p">:</span> <span class="n">zone_id</span><span class="p">,</span>
+            <span class="s2">&quot;custom_ruleset_id&quot;</span><span class="p">:</span> <span class="n">custom_ruleset_id</span><span class="p">,</span>
+            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">rules</span><span class="p">),</span>
+            <span class="s2">&quot;rules&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">],</span>
+            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">rules</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.rules">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.rules">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">RuleObject</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all rules as a list of :class:`RuleObject`</span>
+
+<span class="sd">        Access any value of the object with the dot operator</span>
+
+<span class="sd">        Better handling compared to :func:`get_rules()`, return directly the result key of the function</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.rules</span>
+<span class="sd">        &gt;&gt;&gt; [{&quot;id&quot;: &quot;a1b2c3&quot;, &quot;description&quot;: &quot;Bad Bots&quot;, ...}, {&quot;id&quot;: &quot;d4e5f6&quot;, &quot;description&quot;: &quot;Bad IP&quot;, ...}, ...]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">RuleObject</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rules</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)[</span><span class="s2">&quot;result&quot;</span><span class="p">]]</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.get_rule">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_rule">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RuleObject</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a specific rule by name or ID from a specific domain as :class:`RuleObject`</span>
+
+<span class="sd">        :exception Error: Rule name or rule ID is not provided</span>
+<span class="sd">        :exception Error: If no rule is found with the specified name</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.get_rule(&quot;example.com&quot;, rule_name=&quot;Bad Bots&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;id&quot;: &quot;a1b2c3&quot;, &quot;enabled&quot;: True, &quot;action&quot;: &quot;block&quot;, &quot;description&quot;: &quot;Bad Bots&quot;, &quot;expression&quot;: &quot;(http.user_agent contains &quot;DotBot&quot;)&quot;, ...}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">rule_id</span><span class="p">:</span>
+            <span class="n">rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rules</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">rule_id</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">rule_name</span><span class="p">:</span>
+            <span class="n">rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rules</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">rule_name</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;You must provide a rule_name or rule_id&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rule</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rule &#39;</span><span class="si">{</span><span class="n">rule_name</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
+
+        <span class="n">rule</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">rule</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="n">rule</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">])</span>
+
+        <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;zone_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rules</span><span class="p">[</span><span class="s2">&quot;zone_id&quot;</span><span class="p">]</span>
+        <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;custom_ruleset_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rules</span><span class="p">[</span><span class="s2">&quot;custom_ruleset_id&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">RuleObject</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.export_rules">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.export_rules">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">True</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Export all expressions from a specific domain</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Will save all expressions into multiple files in the folder specified in Cloudflare&#39;s constructor</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.export_rules(&quot;example.com&quot;)</span>
+<span class="sd">        # &quot;Bad Bots.txt&quot;, &quot;Bad IP.txt&quot;, &quot;Bad AS.txt&quot; files created in &quot;my_expressions&quot; folder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rules</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exporting </span><span class="si">{</span><span class="n">rule</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+            <span class="n">header</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">],</span>
+            <span class="p">}</span>
+
+            <span class="n">rule_expression</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">beautify</span><span class="p">(</span><span class="n">rule</span><span class="p">[</span><span class="s2">&quot;expression&quot;</span><span class="p">])</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">write_expression</span><span class="p">(</span><span class="n">rule</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span> <span class="n">rule_expression</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.export_rule">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.export_rule">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rule_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">True</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Export the expression of a rule in a txt file</span>
+
+<span class="sd">        :exception Error: Rule name or rule ID is not provided</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Will save the expression into a file in the folder specified in Cloudflare&#39;s constructor</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.export_rule(&quot;example.com&quot;, &quot;Bad Bots&quot;)</span>
+<span class="sd">        # &quot;Bad Bots.txt&quot; file created in &quot;my_expressions&quot; folder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">rule_id</span><span class="p">:</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rule</span><span class="p">(</span><span class="n">domain_name</span><span class="p">,</span> <span class="n">rule_id</span><span class="o">=</span><span class="n">rule_id</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">rule_name</span><span class="p">:</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rule</span><span class="p">(</span><span class="n">domain_name</span><span class="p">,</span> <span class="n">rule_name</span><span class="o">=</span><span class="n">rule_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;You must provide a rule_name or rule_id&quot;</span><span class="p">)</span>
+
+        <span class="n">header</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">],</span>
+        <span class="p">}</span>
+
+        <span class="n">rule_expression</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">beautify</span><span class="p">(</span><span class="n">rule</span><span class="p">[</span><span class="s2">&quot;expression&quot;</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">write_expression</span><span class="p">(</span><span class="n">rule_name</span><span class="p">,</span> <span class="n">rule_expression</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.create_rule">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.create_rule">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rule_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a rule with a specific expression</span>
+
+<span class="sd">        * action -&gt; Please refer to https://developers.cloudflare.com/ruleset-engine/rules-language/actions/</span>
+
+<span class="sd">        Available actions as string:</span>
+<span class="sd">        `managed_challenge, js_challenge, challenge, block, skip, log`</span>
+
+<span class="sd">        Action is read from the header of the file by default, but you can specify it manually. Else it will be &quot;managed_challenge&quot;</span>
+
+<span class="sd">        * position -&gt; Rule position, with 1 being the first rule in the list</span>
+
+<span class="sd">        :exception Error: Rule file is not found</span>
+<span class="sd">        :exception Error: Rule already exists in remote WAF</span>
+<span class="sd">        :exception Error: Cannot create more rules (5 used / 5 available depending on the current plan)</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.create_rule(&quot;example.com&quot;, &quot;Bad URL.txt&quot;, action=&quot;managed_challenge&quot;)</span>
+<span class="sd">        # Create a rule with the expression in &quot;Bad URL.txt&quot; and override the action to &quot;managed_challenge&quot;</span>
+<span class="sd">        &gt;&gt;&gt; cf.create_rule(&quot;example.com&quot;, &quot;Bad IP.txt&quot;, &quot;Not allowed IP&quot;)</span>
+<span class="sd">        # Create a rule named &quot;Not allowed IP&quot; with the expression in &quot;Bad IP.txt&quot; with the action in the header of the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rule_name</span><span class="p">:</span>
+            <span class="n">rule_name</span> <span class="o">=</span> <span class="n">rule_file</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.txt&quot;</span><span class="p">)</span>
+
+        <span class="n">rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rules</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)</span>
+        <span class="n">zone_id</span> <span class="o">=</span> <span class="n">rules</span><span class="p">[</span><span class="s2">&quot;zone_id&quot;</span><span class="p">]</span>
+        <span class="n">custom_ruleset_id</span> <span class="o">=</span> <span class="n">rules</span><span class="p">[</span><span class="s2">&quot;custom_ruleset_id&quot;</span><span class="p">]</span>
+
+        <span class="n">header</span><span class="p">,</span> <span class="n">expression</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">read_expression</span><span class="p">(</span><span class="n">rule_file</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">expression</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No such file in folder &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">directory</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">rule_name</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">[</span><span class="s2">&quot;rules&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rule &#39;</span><span class="si">{</span><span class="n">rule_name</span><span class="si">}</span><span class="s2">&#39; already exists&quot;</span><span class="p">)</span>
+
+        <span class="n">new_rule</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">rule_name</span><span class="p">,</span>
+            <span class="s2">&quot;expression&quot;</span><span class="p">:</span> <span class="n">expression</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">position</span><span class="p">:</span>
+            <span class="n">new_rule</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="n">position</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">header</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">action</span> <span class="ow">or</span> <span class="s2">&quot;action&quot;</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+                <span class="n">new_rule</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">action</span> <span class="ow">or</span> <span class="n">header</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_rule</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;managed_challenge&quot;</span>
+            <span class="k">if</span> <span class="s2">&quot;enabled&quot;</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+                <span class="n">new_rule</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_rule</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">action</span> <span class="ow">or</span> <span class="s2">&quot;managed_challenge&quot;</span>
+
+        <span class="k">if</span> <span class="n">new_rule</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;skip&quot;</span><span class="p">:</span>
+            <span class="n">new_rule</span><span class="p">[</span><span class="s2">&quot;action_parameters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;phases&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;http_request_firewall_managed&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;http_request_sbfm&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;http_ratelimit&quot;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;products&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="s2">&quot;ruleset&quot;</span><span class="p">:</span> <span class="s2">&quot;current&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_rules</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_rules</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.cloudflare.com/client/v4/zones/</span><span class="si">{</span><span class="n">zone_id</span><span class="si">}</span><span class="s2">/rulesets/</span><span class="si">{</span><span class="n">custom_ruleset_id</span><span class="si">}</span><span class="s2">/rules&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">new_rule</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot create more rules (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">active_rules</span><span class="si">}</span><span class="s2"> used / </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_rules</span><span class="si">}</span><span class="s2"> available)</span><span class="se">\n</span><span class="s2">&quot;</span>
+                        <span class="s2">&quot;</span><span class="se">\t\t\t</span><span class="s2">If you have a better plan, please register the domain plan using cf.set_plan(</span><span class="se">\&quot;</span><span class="s2">&lt;your-domain&gt;</span><span class="se">\&quot;</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.update_rule">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.update_rule">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rule_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update a rule with a specific expression</span>
+
+<span class="sd">        :exception Error: Rule file is not found</span>
+
+<span class="sd">        .. todo::</span>
+<span class="sd">            First modify &quot;Bad Bots.txt&quot; by changing the expression or adding a new rule</span>
+
+<span class="sd">        * position -&gt; Rule position, starting from 1</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.update_rule(&quot;example.com&quot;, &quot;Bad Bots.txt&quot;)</span>
+<span class="sd">        # Will update the remote rule &quot;Bad Bots&quot; with the expression in &quot;Bad Bots.txt&quot;</span>
+<span class="sd">        &gt;&gt;&gt; cf.update_rule(&quot;example.com&quot;, &quot;Bad IP.txt&quot;, &quot;Not allowed IP&quot;, &quot;block&quot;)</span>
+<span class="sd">        # Will update the remote rule &quot;Not allowed IP&quot; with the expression in &quot;Bad IP.txt&quot; and override the action to &quot;block&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rule_name</span><span class="p">:</span>
+            <span class="n">rule_name</span> <span class="o">=</span> <span class="n">rule_file</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.txt&quot;</span><span class="p">)</span>
+
+        <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rule</span><span class="p">(</span><span class="n">domain_name</span><span class="p">,</span> <span class="n">rule_name</span><span class="o">=</span><span class="n">rule_name</span><span class="p">)</span>
+        <span class="n">zone_id</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;zone_id&quot;</span><span class="p">]</span>
+        <span class="n">custom_ruleset_id</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;custom_ruleset_id&quot;</span><span class="p">]</span>
+        <span class="n">rule_id</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+        <span class="n">updated_rule</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">del</span> <span class="n">updated_rule</span><span class="p">[</span><span class="s2">&quot;zone_id&quot;</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">updated_rule</span><span class="p">[</span><span class="s2">&quot;custom_ruleset_id&quot;</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">updated_rule</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+        <span class="n">header</span><span class="p">,</span> <span class="n">expression</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">read_expression</span><span class="p">(</span><span class="n">rule_file</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">expression</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No such file in folder &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">directory</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">header</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">action</span> <span class="ow">or</span> <span class="s2">&quot;action&quot;</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+                <span class="n">updated_rule</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">action</span> <span class="ow">or</span> <span class="n">header</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">&quot;enabled&quot;</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+                <span class="n">updated_rule</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">position</span><span class="p">:</span>
+            <span class="n">updated_rule</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="n">position</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">updated_rule</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;skip&quot;</span><span class="p">:</span>
+            <span class="n">updated_rule</span><span class="p">[</span><span class="s2">&quot;action_parameters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;phases&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;http_request_firewall_managed&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;http_request_sbfm&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;http_ratelimit&quot;</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;products&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="s2">&quot;ruleset&quot;</span><span class="p">:</span> <span class="s2">&quot;current&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="n">updated_rule</span><span class="p">[</span><span class="s2">&quot;expression&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">expression</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.cloudflare.com/client/v4/zones/</span><span class="si">{</span><span class="n">zone_id</span><span class="si">}</span><span class="s2">/rulesets/</span><span class="si">{</span><span class="n">custom_ruleset_id</span><span class="si">}</span><span class="s2">/rules/</span><span class="si">{</span><span class="n">rule_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">updated_rule</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.delete_rule">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.delete_rule">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rule_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete a rule from a specific domain</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.delete_rule(&quot;example.com&quot;, &quot;Bad AS&quot;)</span>
+<span class="sd">        # Will delete the rule &quot;Bad AS&quot; remotely from the domain &quot;example.com&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rule</span><span class="p">(</span><span class="n">domain_name</span><span class="p">,</span> <span class="n">rule_name</span><span class="o">=</span><span class="n">rule_name</span><span class="p">)</span>
+        <span class="n">zone_id</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;zone_id&quot;</span><span class="p">]</span>
+        <span class="n">custom_ruleset_id</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;custom_ruleset_id&quot;</span><span class="p">]</span>
+        <span class="n">rule_id</span> <span class="o">=</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;https://api.cloudflare.com/client/v4/zones/</span><span class="si">{</span><span class="n">zone_id</span><span class="si">}</span><span class="s2">/rulesets/</span><span class="si">{</span><span class="n">custom_ruleset_id</span><span class="si">}</span><span class="s2">/rules/</span><span class="si">{</span><span class="n">rule_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">(),</span> <span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.purge_rules">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.purge_rules">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">purge_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Purge all rules from a specific domain</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.purge_rules(&quot;example.com&quot;)</span>
+<span class="sd">        # Will delete all rules remotely from the domain &quot;example.com&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rules</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)[</span><span class="s2">&quot;rules&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete_rule</span><span class="p">(</span><span class="n">domain_name</span><span class="p">,</span> <span class="n">rule</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_rules</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="Cloudflare.import_rules">
+<a class="viewcode-back" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.import_rules">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">import_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">actions_all</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Import all expressions from all txt file</span>
+
+<span class="sd">        * actions_all -&gt; Set the same action for all imported rules, \</span>
+<span class="sd">        please refer to https://developers.cloudflare.com/ruleset-engine/rules-language/actions/</span>
+
+<span class="sd">        Available actions as string:</span>
+<span class="sd">        `managed_challenge, js_challenge, challenge, block, skip, log`</span>
+
+<span class="sd">        :exception Error: Cannot create more rules (5 used / 5 available depending on the current plan)</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            If you have a better plan, please register your plan using the method :func:`set_plan(domain_name) &lt;set_plan&gt;`</span>
+
+<span class="sd">        &gt;&gt;&gt; cf.import_rules(&quot;example.com&quot;)</span>
+<span class="sd">        # Will use the action in the header specific for every file</span>
+<span class="sd">        &gt;&gt;&gt; cf.import_rules(&quot;example.com&quot;, &quot;block&quot;)</span>
+<span class="sd">        # Will import all rules and use the &quot;block&quot; action</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">files</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">directory</span><span class="p">)</span>
+
+        <span class="n">rules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rules</span><span class="p">(</span><span class="n">domain_name</span><span class="p">)[</span><span class="s2">&quot;rules&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_rules</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.txt&quot;</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Importing </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.txt&quot;</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_rules</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_rules</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">actions_all</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">import_rule</span><span class="p">(</span><span class="n">domain_name</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="n">actions_all</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">import_rule</span><span class="p">(</span><span class="n">domain_name</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">active_rules</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot create more rules (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">active_rules</span><span class="si">}</span><span class="s2"> used / </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_rules</span><span class="si">}</span><span class="s2"> available)</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                    <span class="s2">&quot;</span><span class="se">\t\t\t</span><span class="s2">If you have a better plan, please register the domain plan using cf.set_plan(</span><span class="se">\&quot;</span><span class="s2">&lt;your-domain&gt;</span><span class="se">\&quot;</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+    <span class="n">import_rule</span> <span class="o">=</span> <span class="n">create_rule</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Import a rule with a specific expression</span>
+<span class="sd">    </span>
+<span class="sd">    Alias for :func:`create_rule`</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; cf.import_rule(&quot;example.com&quot;, &quot;Bad URL.txt&quot;, action=&quot;managed_challenge&quot;)</span>
+<span class="sd">    # Import a rule with the expression in &quot;Bad URL.txt&quot;, will use the action in the header if specified or force it using the action argument</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Quentin Lienhardt.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

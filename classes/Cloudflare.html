@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloudflare &mdash; Cloudflare WAF Custom rules  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b36e7c7d" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Error" href="Error.html" />
+    <link rel="prev" title="cf_rules module" href="../cf.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Cloudflare WAF Custom rules
+              <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to Cloudflare’s WAF Custom rules documentation!</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cf.html">cf_rules module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Classes:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Cloudflare</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cf_rules.Cloudflare"><code class="docutils literal notranslate"><span class="pre">Cloudflare</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.__init__"><code class="docutils literal notranslate"><span class="pre">Cloudflare.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.auth_key"><code class="docutils literal notranslate"><span class="pre">Cloudflare.auth_key()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.auth_token"><code class="docutils literal notranslate"><span class="pre">Cloudflare.auth_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.get_domains"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_domains()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.domains"><code class="docutils literal notranslate"><span class="pre">Cloudflare.domains</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.get_domain"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_domain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.set_plan"><code class="docutils literal notranslate"><span class="pre">Cloudflare.set_plan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.get_rulesets"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_rulesets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.rulesets"><code class="docutils literal notranslate"><span class="pre">Cloudflare.rulesets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.get_custom_ruleset"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_custom_ruleset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.get_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.get_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.export_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.export_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.export_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.export_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.create_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.create_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.update_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.update_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.delete_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.delete_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.purge_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.purge_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.import_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.import_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cf_rules.Cloudflare.import_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.import_rule()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Error.html">Error</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Error.html#cf_rules.Error"><code class="docutils literal notranslate"><span class="pre">Error</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Error.html#cf_rules.Error.__init__"><code class="docutils literal notranslate"><span class="pre">Error.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Error.html#cf_rules.Error.handle"><code class="docutils literal notranslate"><span class="pre">Error.handle()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Utils.html#cf_rules.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html#cf_rules.Utils.__init__"><code class="docutils literal notranslate"><span class="pre">Utils.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html#cf_rules.Utils.change_directory"><code class="docutils literal notranslate"><span class="pre">Utils.change_directory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html#cf_rules.Utils.escape"><code class="docutils literal notranslate"><span class="pre">Utils.escape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html#cf_rules.Utils.unescape"><code class="docutils literal notranslate"><span class="pre">Utils.unescape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html#cf_rules.Utils.beautify"><code class="docutils literal notranslate"><span class="pre">Utils.beautify()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html#cf_rules.Utils.write_expression"><code class="docutils literal notranslate"><span class="pre">Utils.write_expression()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html#cf_rules.Utils.read_expression"><code class="docutils literal notranslate"><span class="pre">Utils.read_expression()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html#cf_rules.Utils.process_header"><code class="docutils literal notranslate"><span class="pre">Utils.process_header()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Utils.html#cf_rules.Utils.get_json_key"><code class="docutils literal notranslate"><span class="pre">Utils.get_json_key()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/create-rules.html">Create rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/list-domains.html">List domains script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/list-rules.html">List rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/new-rules.html">New clean rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/update-rules.html">Update rules script</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Cloudflare WAF Custom rules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Cloudflare</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/QuentiumYT/Cloudflare-Firewall-Rules/blob/main/docs/classes/Cloudflare.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cloudflare">
+<h1>Cloudflare<a class="headerlink" href="#cloudflare" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cf_rules.</span></span><span class="sig-name descname"><span class="pre">Cloudflare</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare" title="Link to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initialize Cloudflare class</p>
+<p>Specify a folder argument where expressions will be saved</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span> <span class="o">=</span> <span class="n">Cloudflare</span><span class="p">(</span><span class="s2">&quot;my_expressions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.auth_key">
+<span class="sig-name descname"><span class="pre">auth_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.auth_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.auth_key" title="Link to this definition"></a></dt>
+<dd><p>Get your global API Key through cloudflare profile (API Keys section)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – Email or key is not provided</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This will grant all domains access to this API library, prefer using <a class="reference internal" href="#cf_rules.Cloudflare.auth_token" title="cf_rules.Cloudflare.auth_token"><code class="xref py py-func docutils literal notranslate"><span class="pre">auth_token()</span></code></a></p>
+</div>
+<p><a class="reference external" href="https://dash.cloudflare.com/profile/api-tokens">https://dash.cloudflare.com/profile/api-tokens</a></p>
+<ul class="simple">
+<li><p>email -&gt; Email account</p></li>
+<li><p>key -&gt; Global API Key</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">auth_key</span><span class="p">(</span><span class="s2">&quot;cloudflare@example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;your-global-api-key&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;cloudflare@example.com&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}}</span>
+<span class="go"># OR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">6003</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid request headers&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}]}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.auth_token">
+<span class="sig-name descname"><span class="pre">auth_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bearer_token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.auth_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.auth_token" title="Link to this definition"></a></dt>
+<dd><p>Generate a specific token through cloudflare profile (API Tokens section)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – Bearer token is not provided</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will grant only specific domains/permissions related access to this API library</p>
+</div>
+<p><a class="reference external" href="https://dash.cloudflare.com/profile/api-tokens">https://dash.cloudflare.com/profile/api-tokens</a></p>
+<ul class="simple">
+<li><p>bearer_token -&gt; API Token</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">auth_token</span><span class="p">(</span><span class="s2">&quot;your-specific-bearer-token&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">},</span> <span class="o">...</span><span class="p">}</span>
+<span class="go"># OR</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;errors&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid API token&quot;</span><span class="p">}],</span> <span class="o">...</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.get_domains">
+<span class="sig-name descname"><span class="pre">get_domains</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.get_domains"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.get_domains" title="Link to this definition"></a></dt>
+<dd><p>Get all domains</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – If not authenticated (use <a class="reference internal" href="#cf_rules.Cloudflare.auth_key" title="cf_rules.Cloudflare.auth_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">auth_key(email,</span> <span class="pre">key)</span></code></a> or <a class="reference internal" href="#cf_rules.Cloudflare.auth_token" title="cf_rules.Cloudflare.auth_token"><code class="xref py py-func docutils literal notranslate"><span class="pre">auth_token(bearer_token)</span></code></a>)</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">get_domains</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;domains&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;example.fr&quot;</span><span class="p">],</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span> <span class="o">...</span><span class="p">]}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.domains">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">domains</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">DomainObject</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cf_rules.Cloudflare.domains" title="Link to this definition"></a></dt>
+<dd><p>Get all domains as a list of <code class="xref py py-class docutils literal notranslate"><span class="pre">DomainObject</span></code></p>
+<p>Access any value of the object with the dot operator</p>
+<p>Better handling compared to <a class="reference internal" href="#cf_rules.Cloudflare.get_domains" title="cf_rules.Cloudflare.get_domains"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_domains()</span></code></a>, return directly the result key of the function</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">domains</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;d4e5f6&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;example.fr&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.get_domain">
+<span class="sig-name descname"><span class="pre">get_domain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DomainObject</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.get_domain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.get_domain" title="Link to this definition"></a></dt>
+<dd><p>Get a specific domain as <code class="xref py py-class docutils literal notranslate"><span class="pre">DomainObject</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – If not authenticated (use <a class="reference internal" href="#cf_rules.Cloudflare.auth_key" title="cf_rules.Cloudflare.auth_key"><code class="xref py py-func docutils literal notranslate"><span class="pre">auth_key(email,</span> <span class="pre">key)</span></code></a> or <a class="reference internal" href="#cf_rules.Cloudflare.auth_token" title="cf_rules.Cloudflare.auth_token"><code class="xref py py-func docutils literal notranslate"><span class="pre">auth_token(bearer_token)</span></code></a>)</p></li>
+<li><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – If domain is not found (list all domains using cf.domains)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This function is the “core” for all other functions,
+it is needed for every other function to work</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">get_domain</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domain</span> <span class="o">=</span> <span class="n">cf</span><span class="o">.</span><span class="n">get_domain</span><span class="p">(</span><span class="s2">&quot;example.fr&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">domain</span><span class="o">.</span><span class="n">name</span> <span class="c1"># OR domain[&quot;name&quot;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;example.fr&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.set_plan">
+<span class="sig-name descname"><span class="pre">set_plan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.set_plan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.set_plan" title="Link to this definition"></a></dt>
+<dd><p>Save current website plan</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Will define the current plan of the website in the instance of the class</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">set_plan</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">)</span>
+<span class="go"># Now the maximum available rules for this domain depends on the current plan</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.get_rulesets">
+<span class="sig-name descname"><span class="pre">get_rulesets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.get_rulesets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.get_rulesets" title="Link to this definition"></a></dt>
+<dd><p>Get all rulesets from a specific domain</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">get_rulesets</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;rulesets&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;Cloudflare Normalization Ruleset&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}]}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.rulesets">
+<span class="sig-name descname"><span class="pre">rulesets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">RulesetObject</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.rulesets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.rulesets" title="Link to this definition"></a></dt>
+<dd><p>Get all rulesets as a list of <code class="xref py py-class docutils literal notranslate"><span class="pre">RulesetObject</span></code></p>
+<p>Access any value of the object with the dot operator</p>
+<p>Better handling compared to <a class="reference internal" href="#cf_rules.Cloudflare.get_rulesets" title="cf_rules.Cloudflare.get_rulesets"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_rulesets()</span></code></a>, return directly the result key of the function</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">rulesets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;d4e5f6&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cloudflare Normalization Ruleset&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.get_custom_ruleset">
+<span class="sig-name descname"><span class="pre">get_custom_ruleset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">RulesetObject</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.get_custom_ruleset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.get_custom_ruleset" title="Link to this definition"></a></dt>
+<dd><p>Get the custom ruleset from a specific domain as <code class="xref py py-class docutils literal notranslate"><span class="pre">RulesetObject</span></code></p>
+<p>It should be the only ruleset with the source “firewall_custom” as per Cloudflare’s documentation.
+This is the ruleset where all custom rules are stored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – If no custom ruleset is found</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">get_custom_ruleset</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;firewall_custom&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.get_rules">
+<span class="sig-name descname"><span class="pre">get_rules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.get_rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.get_rules" title="Link to this definition"></a></dt>
+<dd><p>Get all rules from a specific domain</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – If no rules are found</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">get_rules</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;rules&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Bad Bots&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad IP&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad AS&quot;</span><span class="p">],</span> <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Bad Bots&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span> <span class="o">...</span><span class="p">]}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.rules">
+<span class="sig-name descname"><span class="pre">rules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">RuleObject</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.rules" title="Link to this definition"></a></dt>
+<dd><p>Get all rules as a list of <code class="xref py py-class docutils literal notranslate"><span class="pre">RuleObject</span></code></p>
+<p>Access any value of the object with the dot operator</p>
+<p>Better handling compared to <a class="reference internal" href="#cf_rules.Cloudflare.get_rules" title="cf_rules.Cloudflare.get_rules"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_rules()</span></code></a>, return directly the result key of the function</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">rules</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Bad Bots&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;d4e5f6&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Bad IP&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">},</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.get_rule">
+<span class="sig-name descname"><span class="pre">get_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">RuleObject</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.get_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.get_rule" title="Link to this definition"></a></dt>
+<dd><p>Get a specific rule by name or ID from a specific domain as <code class="xref py py-class docutils literal notranslate"><span class="pre">RuleObject</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – Rule name or rule ID is not provided</p></li>
+<li><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – If no rule is found with the specified name</p></li>
+</ul>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">get_rule</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="n">rule_name</span><span class="o">=</span><span class="s2">&quot;Bad Bots&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a1b2c3&quot;</span><span class="p">,</span> <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;block&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Bad Bots&quot;</span><span class="p">,</span> <span class="s2">&quot;expression&quot;</span><span class="p">:</span> <span class="s2">&quot;(http.user_agent contains &quot;</span><span class="n">DotBot</span><span class="s2">&quot;)&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.export_rules">
+<span class="sig-name descname"><span class="pre">export_rules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="k"><span class="pre">True</span></span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.export_rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.export_rules" title="Link to this definition"></a></dt>
+<dd><p>Export all expressions from a specific domain</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Will save all expressions into multiple files in the folder specified in Cloudflare’s constructor</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">export_rules</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">)</span>
+<span class="go"># &quot;Bad Bots.txt&quot;, &quot;Bad IP.txt&quot;, &quot;Bad AS.txt&quot; files created in &quot;my_expressions&quot; folder</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.export_rule">
+<span class="sig-name descname"><span class="pre">export_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="k"><span class="pre">True</span></span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.export_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.export_rule" title="Link to this definition"></a></dt>
+<dd><p>Export the expression of a rule in a txt file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – Rule name or rule ID is not provided</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Will save the expression into a file in the folder specified in Cloudflare’s constructor</p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">export_rule</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad Bots&quot;</span><span class="p">)</span>
+<span class="go"># &quot;Bad Bots.txt&quot; file created in &quot;my_expressions&quot; folder</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.create_rule">
+<span class="sig-name descname"><span class="pre">create_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.create_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.create_rule" title="Link to this definition"></a></dt>
+<dd><p>Create a rule with a specific expression</p>
+<ul class="simple">
+<li><p>action -&gt; Please refer to <a class="reference external" href="https://developers.cloudflare.com/ruleset-engine/rules-language/actions/">https://developers.cloudflare.com/ruleset-engine/rules-language/actions/</a></p></li>
+</ul>
+<p>Available actions as string:
+<cite>managed_challenge, js_challenge, challenge, block, skip, log</cite></p>
+<p>Action is read from the header of the file by default, but you can specify it manually. Else it will be “managed_challenge”</p>
+<ul class="simple">
+<li><p>position -&gt; Rule position, with 1 being the first rule in the list</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – Rule file is not found</p></li>
+<li><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – Rule already exists in remote WAF</p></li>
+<li><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – Cannot create more rules (5 used / 5 available depending on the current plan)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">create_rule</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad URL.txt&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;managed_challenge&quot;</span><span class="p">)</span>
+<span class="go"># Create a rule with the expression in &quot;Bad URL.txt&quot; and override the action to &quot;managed_challenge&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">create_rule</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad IP.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;Not allowed IP&quot;</span><span class="p">)</span>
+<span class="go"># Create a rule named &quot;Not allowed IP&quot; with the expression in &quot;Bad IP.txt&quot; with the action in the header of the file</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.update_rule">
+<span class="sig-name descname"><span class="pre">update_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.update_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.update_rule" title="Link to this definition"></a></dt>
+<dd><p>Update a rule with a specific expression</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – Rule file is not found</p>
+</dd>
+</dl>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>First modify “Bad Bots.txt” by changing the expression or adding a new rule</p>
+</div>
+<ul class="simple">
+<li><p>position -&gt; Rule position, starting from 1</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">update_rule</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad Bots.txt&quot;</span><span class="p">)</span>
+<span class="go"># Will update the remote rule &quot;Bad Bots&quot; with the expression in &quot;Bad Bots.txt&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">update_rule</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad IP.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;Not allowed IP&quot;</span><span class="p">,</span> <span class="s2">&quot;block&quot;</span><span class="p">)</span>
+<span class="go"># Will update the remote rule &quot;Not allowed IP&quot; with the expression in &quot;Bad IP.txt&quot; and override the action to &quot;block&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.delete_rule">
+<span class="sig-name descname"><span class="pre">delete_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.delete_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.delete_rule" title="Link to this definition"></a></dt>
+<dd><p>Delete a rule from a specific domain</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">delete_rule</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad AS&quot;</span><span class="p">)</span>
+<span class="go"># Will delete the rule &quot;Bad AS&quot; remotely from the domain &quot;example.com&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.purge_rules">
+<span class="sig-name descname"><span class="pre">purge_rules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.purge_rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.purge_rules" title="Link to this definition"></a></dt>
+<dd><p>Purge all rules from a specific domain</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">purge_rules</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">)</span>
+<span class="go"># Will delete all rules remotely from the domain &quot;example.com&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.import_rules">
+<span class="sig-name descname"><span class="pre">import_rules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actions_all</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/cf_rules/cf.html#Cloudflare.import_rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#cf_rules.Cloudflare.import_rules" title="Link to this definition"></a></dt>
+<dd><p>Import all expressions from all txt file</p>
+<ul class="simple">
+<li><p>actions_all -&gt; Set the same action for all imported rules,         please refer to <a class="reference external" href="https://developers.cloudflare.com/ruleset-engine/rules-language/actions/">https://developers.cloudflare.com/ruleset-engine/rules-language/actions/</a></p></li>
+</ul>
+<p>Available actions as string:
+<cite>managed_challenge, js_challenge, challenge, block, skip, log</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="Error.html#cf_rules.Error" title="cf_rules.Error"><strong>Error</strong></a> – Cannot create more rules (5 used / 5 available depending on the current plan)</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have a better plan, please register your plan using the method <a class="reference internal" href="#cf_rules.Cloudflare.set_plan" title="cf_rules.Cloudflare.set_plan"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_plan(domain_name)</span></code></a></p>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">import_rules</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">)</span>
+<span class="go"># Will use the action in the header specific for every file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">import_rules</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;block&quot;</span><span class="p">)</span>
+<span class="go"># Will import all rules and use the &quot;block&quot; action</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cf_rules.Cloudflare.import_rule">
+<span class="sig-name descname"><span class="pre">import_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cf_rules.Cloudflare.import_rule" title="Link to this definition"></a></dt>
+<dd><p>Import a rule with a specific expression</p>
+<p>Alias for <a class="reference internal" href="#cf_rules.Cloudflare.create_rule" title="cf_rules.Cloudflare.create_rule"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_rule()</span></code></a></p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span><span class="o">.</span><span class="n">import_rule</span><span class="p">(</span><span class="s2">&quot;example.com&quot;</span><span class="p">,</span> <span class="s2">&quot;Bad URL.txt&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;managed_challenge&quot;</span><span class="p">)</span>
+<span class="go"># Import a rule with the expression in &quot;Bad URL.txt&quot;, will use the action in the header if specified or force it using the action argument</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../cf.html" class="btn btn-neutral float-left" title="cf_rules module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Error.html" class="btn btn-neutral float-right" title="Error" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Quentin Lienhardt.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

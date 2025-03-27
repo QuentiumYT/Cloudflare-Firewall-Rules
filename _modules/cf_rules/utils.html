@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cf_rules.utils &mdash; Cloudflare WAF Custom rules  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b36e7c7d" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Cloudflare WAF Custom rules
+              <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Introduction:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Welcome to Cloudflare’s WAF Custom rules documentation!</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Module:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../cf.html">cf_rules module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Classes:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../classes/Cloudflare.html">Cloudflare</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare"><code class="docutils literal notranslate"><span class="pre">Cloudflare</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.__init__"><code class="docutils literal notranslate"><span class="pre">Cloudflare.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.auth_key"><code class="docutils literal notranslate"><span class="pre">Cloudflare.auth_key()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.auth_token"><code class="docutils literal notranslate"><span class="pre">Cloudflare.auth_token()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_domains"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_domains()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.domains"><code class="docutils literal notranslate"><span class="pre">Cloudflare.domains</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_domain"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_domain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.set_plan"><code class="docutils literal notranslate"><span class="pre">Cloudflare.set_plan()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_rulesets"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_rulesets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.rulesets"><code class="docutils literal notranslate"><span class="pre">Cloudflare.rulesets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_custom_ruleset"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_custom_ruleset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.get_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.get_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.export_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.export_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.export_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.export_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.create_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.create_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.update_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.update_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.delete_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.delete_rule()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.purge_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.purge_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.import_rules"><code class="docutils literal notranslate"><span class="pre">Cloudflare.import_rules()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Cloudflare.html#cf_rules.Cloudflare.import_rule"><code class="docutils literal notranslate"><span class="pre">Cloudflare.import_rule()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../classes/Error.html">Error</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classes/Error.html#cf_rules.Error"><code class="docutils literal notranslate"><span class="pre">Error</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Error.html#cf_rules.Error.__init__"><code class="docutils literal notranslate"><span class="pre">Error.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Error.html#cf_rules.Error.handle"><code class="docutils literal notranslate"><span class="pre">Error.handle()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../classes/Utils.html">Utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.__init__"><code class="docutils literal notranslate"><span class="pre">Utils.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.change_directory"><code class="docutils literal notranslate"><span class="pre">Utils.change_directory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.escape"><code class="docutils literal notranslate"><span class="pre">Utils.escape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.unescape"><code class="docutils literal notranslate"><span class="pre">Utils.unescape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.beautify"><code class="docutils literal notranslate"><span class="pre">Utils.beautify()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.write_expression"><code class="docutils literal notranslate"><span class="pre">Utils.write_expression()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.read_expression"><code class="docutils literal notranslate"><span class="pre">Utils.read_expression()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.process_header"><code class="docutils literal notranslate"><span class="pre">Utils.process_header()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../classes/Utils.html#cf_rules.Utils.get_json_key"><code class="docutils literal notranslate"><span class="pre">Utils.get_json_key()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/create-rules.html">Create rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/list-domains.html">List domains script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/list-rules.html">List rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/new-rules.html">New clean rules script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/update-rules.html">Update rules script</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Cloudflare WAF Custom rules</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">cf_rules.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for cf_rules.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+
+<div class="viewcode-block" id="Utils">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Utils</span><span class="p">:</span>
+<div class="viewcode-block" id="Utils.__init__">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Utils class to manage Cloudflare data</span>
+
+<span class="sd">        &gt;&gt;&gt; utils = Utils(&quot;my_expressions&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">directory</span> <span class="o">=</span> <span class="n">directory</span> <span class="ow">or</span> <span class="s2">&quot;expressions&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Utils.change_directory">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils.change_directory">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">change_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Change the directory where the expressions are stored</span>
+
+<span class="sd">        &gt;&gt;&gt; utils.change_directory(&quot;my_expressions2&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">directory</span> <span class="o">=</span> <span class="n">directory</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Utils.escape">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils.escape">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">escape</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Escape a string</span>
+
+<span class="sd">        Simply replace slashes with underscores for the file name</span>
+
+<span class="sd">        &gt;&gt;&gt; utils.escape(&quot;Test/1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; &quot;Test_1&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># return &quot;&quot;.join(c if c.isalnum() else &quot;_&quot; for c in string)</span>
+        <span class="k">return</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Utils.unescape">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils.unescape">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unescape</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Unescape a string</span>
+
+<span class="sd">        Simply replace underscores with slashes for the rule name</span>
+
+<span class="sd">        &gt;&gt;&gt; utils.unescape(&quot;Test_1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; &quot;Test/1&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># return string.replace(&quot;___&quot;, &quot; - &quot;).replace(&quot;_&quot;, &quot; &quot;)</span>
+        <span class="k">return</span> <span class="n">string</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Utils.beautify">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils.beautify">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">beautify</span><span class="p">(</span><span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Beautify a Cloudflare expression</span>
+
+<span class="sd">        &gt;&gt;&gt; utils.beautify(&quot;(cf.client.bot) or (cf.threat_score ge 1)&quot;)</span>
+<span class="sd">        # (cf.client.bot) or</span>
+<span class="sd">        # (cf.threat_score ge 1)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">expression</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; or &quot;</span><span class="p">,</span> <span class="s2">&quot; or</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; and &quot;</span><span class="p">,</span> <span class="s2">&quot; and</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Utils.write_expression">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils.write_expression">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_expression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rule_expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">header</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write an expression to a readable text file</span>
+
+<span class="sd">        &gt;&gt;&gt; utils.write_expression(&quot;IsBot&quot;, &quot;(cf.client.bot)&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; utils.write_expression(&quot;IsBot&quot;, &quot;(cf.client.bot)&quot;, header={&quot;action&quot;: &quot;managed_challenge&quot;, &quot;enabled&quot;: &quot;True&quot;})</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rule_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.txt&quot;</span><span class="p">):</span>
+            <span class="n">rule_file</span> <span class="o">+=</span> <span class="s2">&quot;.txt&quot;</span>
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">rule_file</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">header</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">header</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#! </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2"> !#</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">rule_expression</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Utils.read_expression">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils.read_expression">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_expression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read an expression from a file</span>
+
+<span class="sd">        &gt;&gt;&gt; utils.read_expression(&quot;IsBot&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; &quot;(cf.client.bot)&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rule_file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.txt&quot;</span><span class="p">):</span>
+            <span class="n">rule_file</span> <span class="o">+=</span> <span class="s2">&quot;.txt&quot;</span>
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">rule_file</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="c1"># pylint: disable=import-outside-toplevel</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">.error</span><span class="w"> </span><span class="kn">import</span> <span class="n">Error</span>
+
+            <span class="k">raise</span> <span class="n">Error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No such file in folder &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">first_line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_header</span><span class="p">(</span><span class="n">first_line</span><span class="p">)</span>
+
+            <span class="n">expression</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)]</span>
+
+            <span class="c1"># If the first line is not a header or a comment, we add it to the expression</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">header</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">first_line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>
+                <span class="n">expression</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">first_line</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">header</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Utils.process_header">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils.process_header">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header_line</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the header of an expression file if it exists</span>
+<span class="sd">        It retrieves all header data and returns a dictionary</span>
+
+<span class="sd">        &gt;&gt;&gt; utils.process_header(&quot;#! action:block enabled:True !#&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; {&quot;action&quot;: &quot;block&quot;, &quot;enabled&quot;: &quot;True&quot;}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">header_line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#!&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">header_line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;!#&quot;</span><span class="p">):</span>
+            <span class="n">header_data</span> <span class="o">=</span> <span class="n">header_line</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">header_data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)])</span>
+
+            <span class="k">if</span> <span class="s2">&quot;action&quot;</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+                <span class="c1"># List of all available actions for Cloudflare</span>
+                <span class="n">available_actions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;managed_challenge&quot;</span><span class="p">,</span> <span class="s2">&quot;js_challenge&quot;</span><span class="p">,</span> <span class="s2">&quot;challenge&quot;</span><span class="p">,</span> <span class="s2">&quot;block&quot;</span><span class="p">,</span> <span class="s2">&quot;skip&quot;</span><span class="p">,</span> <span class="s2">&quot;log&quot;</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">header</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available_actions</span><span class="p">:</span>
+                    <span class="k">del</span> <span class="n">header</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The action in the header is not valid, ignoring it...&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List of available actions: &quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">available_actions</span><span class="p">))</span>
+            <span class="k">if</span> <span class="s2">&quot;enabled&quot;</span> <span class="ow">in</span> <span class="n">header</span><span class="p">:</span>
+                <span class="n">header</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">header</span></div>
+
+
+<div class="viewcode-block" id="Utils.get_json_key">
+<a class="viewcode-back" href="../../classes/Utils.html#cf_rules.Utils.get_json_key">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_json_key</span><span class="p">(</span><span class="n">json</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">object</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get an element from a json using a list of keys</span>
+
+<span class="sd">        &gt;&gt;&gt; utils.get_json_key({&quot;a&quot;: {&quot;b&quot;: {&quot;c&quot;: &quot;d&quot;}}}, [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;])</span>
+<span class="sd">        &gt;&gt;&gt; &quot;d&quot;</span>
+<span class="sd">        &gt;&gt;&gt; utils.get_json_key({&quot;a&quot;: [&quot;b&quot;, &quot;c&quot;]}, [&quot;a&quot;, 1])</span>
+<span class="sd">        &gt;&gt;&gt; &quot;c&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">json</span>
+                <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">json</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">key</span>
+            <span class="p">):</span>
+                <span class="n">json</span> <span class="o">=</span> <span class="n">json</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">json</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Quentin Lienhardt.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
