@@ -130,7 +130,7 @@ class Utils:
                     print("The action in the header is not valid, ignoring it...")
                     print("List of available actions: " + ", ".join(available_actions))
             if "enabled" in header:
-                header["enabled"] = header["enabled"].lower() != "true"
+                header["enabled"] = header["enabled"].lower() == "true"
         else:
             header = None
 
