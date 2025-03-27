@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 - Nothing yet!
 
+## [2.1.0] - Misc bugs & rule position (2025-03-27)
+
+- Fix misc bugs & examples (Thanks @chaud #2)
+- Add support for rule position (Thanks @chaud #2)
+- Lint & format code with ruff
+
 ## [2.0.0] - Complete rewrite for new WAF API (2024-01-26)
 
 > ### Renamed the project to Cloudflare WAF custom rules since the API changed and will be removed on may 2024

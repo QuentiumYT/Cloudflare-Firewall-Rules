@@ -20,7 +20,7 @@ from cf_rules import __version__ # noqa: E402
 # -- Project information -----------------------------------------------------
 
 project = 'Cloudflare WAF Custom rules'
-copyright = '2024, Quentin Lienhardt'
+copyright = '2025, Quentin Lienhardt'
 author = 'Quentin Lienhardt'
 version = __version__
 
