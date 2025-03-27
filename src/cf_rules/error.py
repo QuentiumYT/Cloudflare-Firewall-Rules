@@ -62,10 +62,7 @@ class Error(Exception):
             for error in request_json.get("errors"):
                 main_msg = error.get("message")
                 if error.get("error_chain"):
-                    messages.extend(
-                        main_msg + " -> " + error_chain.get("message")
-                        for error_chain in error.get("error_chain")
-                    )
+                    messages.extend(main_msg + " -> " + error_chain.get("message") for error_chain in error.get("error_chain"))
                 else:
                     messages.append(main_msg)
 

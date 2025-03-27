@@ -1,5 +1,6 @@
 import os
 
+
 class Utils:
     def __init__(self, directory: str = None) -> None:
         """Utils class to manage Cloudflare data
@@ -100,8 +101,7 @@ class Utils:
             first_line = file.readline().strip()
             header = self.process_header(first_line)
 
-            expression = [x.strip() for x in file.readlines()
-                          if not x.strip().startswith("#")]
+            expression = [x.strip() for x in file.readlines() if not x.strip().startswith("#")]
 
             # If the first line is not a header or a comment, we add it to the expression
             if not header and not first_line.startswith("#"):

@@ -5,21 +5,23 @@ import requests
 from .error import Error
 from .utils import Utils
 
+
 class DomainObject(dict):
     def __init__(self, *args, **kwargs):
         super(DomainObject, self).__init__(*args, **kwargs)
         self.__dict__ = self
+
 
 class RuleObject(dict):
     def __init__(self, *args, **kwargs):
         super(RuleObject, self).__init__(*args, **kwargs)
         self.__dict__ = self
 
+
 class RulesetObject(dict):
     def __init__(self, *args, **kwargs):
         super(RulesetObject, self).__init__(*args, **kwargs)
         self.__dict__ = self
-
 
 
 class Cloudflare:
@@ -66,7 +68,7 @@ class Cloudflare:
         self._headers = {
             "X-Auth-Email": email,
             "X-Auth-Key": key,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         }
 
         r = requests.get("https://api.cloudflare.com/client/v4/user", headers=self._headers, timeout=5)
@@ -96,7 +98,7 @@ class Cloudflare:
 
         self._headers = {
             "Authorization": "Bearer " + bearer_token,
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         }
 
         r = requests.get("https://api.cloudflare.com/client/v4/user/tokens/verify", headers=self._headers, timeout=5)
@@ -246,8 +248,7 @@ class Cloudflare:
 
         rulesets = self.get_rulesets(domain_name)
 
-        custom_ruleset = [x for x in rulesets["result"]
-                          if x.get("source") == "firewall_custom"]
+        custom_ruleset = [x for x in rulesets["result"] if x.get("source") == "firewall_custom"]
 
         if not custom_ruleset:
             raise Error("No custom ruleset found")
@@ -455,14 +456,14 @@ class Cloudflare:
 
         if new_rule["action"] == "skip":
             new_rule["action_parameters"] = {
-                                                "phases": [
-                                                    "http_request_firewall_managed",
-                                                    "http_request_sbfm",
-                                                    "http_ratelimit"
-                                                ],
-                                                "products": [],
-                                                "ruleset": "current"
-                                            }
+                "phases": [
+                    "http_request_firewall_managed",
+                    "http_request_sbfm",
+                    "http_ratelimit",
+                ],
+                "products": [],
+                "ruleset": "current",
+            }
 
         if self.active_rules < self.max_rules:
             r = requests.post(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}/rules", headers=self._headers, json=new_rule, timeout=5)
@@ -514,17 +515,17 @@ class Cloudflare:
 
         if position:
             updated_rule["position"] = {"index": position}
-        
+
         if updated_rule["action"] == "skip":
             updated_rule["action_parameters"] = {
-                                                    "phases": [
-                                                        "http_request_firewall_managed",
-                                                        "http_request_sbfm",
-                                                        "http_ratelimit"
-                                                    ],
-                                                    "products": [],
-                                                    "ruleset": "current"
-                                                }
+                "phases": [
+                    "http_request_firewall_managed",
+                    "http_request_sbfm",
+                    "http_ratelimit",
+                ],
+                "products": [],
+                "ruleset": "current",
+            }
 
         updated_rule["expression"] = expression
 
