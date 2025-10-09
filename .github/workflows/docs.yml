@@ -10,24 +10,31 @@ jobs:
   docs:
     name: Build docs
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
       - name: Install Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.x"
+
       - name: Install dependencies
         run: |
           python -m pip install -U pip
-          python -m pip install -r requirements.txt
+          python -m pip install -r requirements-docs.txt
+
       - name: Sphinx problems report
         uses: ammaraskar/sphinx-problem-matcher@v1
+
       - name: Build Sphinx docs
         run: |
           cd docs/
           TZ=UTC make html
           sed -i 's/url_root="#"/url_root=""/' _build/html/index.html || true
+
       - name: Commit documentation changes
         run: |
           git config --local user.email "action@github.com"
@@ -39,9 +46,6 @@ jobs:
           touch .nojekyll
           git add .
           git commit -a -m "Update documentation"
-      - name: Deploy pages
-        uses: ad-m/github-push-action@master
-        with:
-          branch: gh-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force: true
+          git push --force origin gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

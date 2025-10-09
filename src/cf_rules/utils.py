@@ -93,11 +93,11 @@ class Utils:
 
         if not os.path.isfile(filename):
             # pylint: disable=import-outside-toplevel
-            from .error import Error
+            from .error import Error  # noqa: PLC0415
 
             raise Error(f"No such file in folder '{self.directory}'")
 
-        with open(filename, "r", encoding="utf-8") as file:
+        with open(filename, encoding="utf-8") as file:
             first_line = file.readline().strip()
             header = self.process_header(first_line)
 

@@ -5,7 +5,7 @@ __version__ = "2.1.0"
 
 __author__ = "Quentin Lienhardt"
 __author_email__ = "pro@quentium.fr"
-__license__ = "Apache 2.0"
+__license__ = "Apache-2.0"
 __copyright__ = "Copyright 2025 Quentin Lienhardt"
 
 __all__ = (
@@ -15,5 +15,5 @@ __all__ = (
 )
 
 from .cf import Cloudflare
-from .utils import Utils
 from .error import Error
+from .utils import Utils

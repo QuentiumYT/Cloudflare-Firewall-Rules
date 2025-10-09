@@ -28,7 +28,7 @@ class Error(Exception):
         return "Unknown error"
 
     def __repr__(self) -> str:
-        return "'" + self.__str__() + "'"
+        return f"'{self.__str__()}'"
 
     def __bool__(self) -> bool:
         return hasattr(self, "message")
@@ -53,7 +53,7 @@ class Error(Exception):
 
         if request_json.get("success"):
             # pylint: disable=import-outside-toplevel
-            from .utils import Utils
+            from .utils import Utils  # noqa: PLC0415
 
             return Utils.get_json_key(request_json, keys)
 
@@ -62,7 +62,10 @@ class Error(Exception):
             for error in request_json.get("errors"):
                 main_msg = error.get("message")
                 if error.get("error_chain"):
-                    messages.extend(main_msg + " -> " + error_chain.get("message") for error_chain in error.get("error_chain"))
+                    messages.extend(
+                        f"{main_msg} -> " + error_chain.get("message")  #
+                        for error_chain in error.get("error_chain")
+                    )
                 else:
                     messages.append(main_msg)
 

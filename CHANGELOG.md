@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-- Nothing yet!
+- Newer pyproject with Python >= 3.11 (matching sphinx requirement)
+- Setup UV to take over environment
+- Cleaner code & format with Ruff + fix removed sphinx display_version
 
 ## [2.1.0] - Misc bugs & rule position (2025-03-27)
 
 - Fix misc bugs & examples (Thanks @chaud #2)
 - Add support for rule position (Thanks @chaud #2)
-- Lint & format code with ruff
+- Lint & format code with Ruff
 
 ## [2.0.0] - Complete rewrite for new WAF API (2024-01-26)
 

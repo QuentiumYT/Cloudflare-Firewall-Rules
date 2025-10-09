@@ -1,34 +1,46 @@
 [project]
 name = "cf_rules"
 description = "Wrapper library to import / export multiple remote rules and easily create, modify and delete rules."
+requires-python = ">=3.11"
 readme = "README.md"
-keywords = ["api", "rules", "wrapper", "library", "firewall", "waf", "cloudflare", "bulk"]
-license = {file = "LICENSE"}
-authors = [{name = "Quentin Lienhardt", email = "pro@quentium.fr" }]
+keywords = [
+  "api",
+  "rules",
+  "wrapper",
+  "library",
+  "firewall",
+  "waf",
+  "cloudflare",
+  "bulk",
+]
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Quentin Lienhardt", email = "pro@quentium.fr" }]
 classifiers = [
-"Development Status :: 5 - Production/Stable",
-"Environment :: Web Environment",
-"Intended Audience :: Developers",
-"License :: OSI Approved :: Apache Software License",
-"Operating System :: OS Independent",
-"Programming Language :: Python :: 3",
-"Programming Language :: Python :: 3.9",
-"Programming Language :: Python :: 3.10",
-"Programming Language :: Python :: 3.11",
-"Programming Language :: Python :: 3.12",
-"Programming Language :: Python :: 3.13",
-"Programming Language :: Python :: 3 :: Only",
-"Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-"Topic :: Software Development :: Libraries :: Python Modules",
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Web Environment",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+  "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-requires-python = ">=3.9"
-dependencies = [
-"requests>=2.32",
-"sphinx>=8.2",
-"sphinx-rtd-theme>=3.0",
-"sphinx-copybutton>=0.5",
-]
+dependencies = ["requests>=2.32"]
+
 dynamic = ["version"]
+
+[dependency-groups]
+docs = [
+  "sphinx>=8.2",
+  "sphinx-rtd-theme>=3.0",
+  "sphinx-copybutton>=0.5",
+  "sphinx-autobuild>=2025.8.25",
+]
 
 [project.urls]
 "Homepage" = "https://github.com/QuentiumYT/Cloudflare-Firewall-Rules"
@@ -36,9 +48,5 @@ dynamic = ["version"]
 "Source Code" = "https://github.com/QuentiumYT/Cloudflare-Firewall-Rules"
 "Bug Reports" = "https://github.com/QuentiumYT/Cloudflare-Firewall-Rules/issues"
 
-[build-system]
-requires = ["setuptools>=61"]
-build-backend = "setuptools.build_meta"
-
 [tool.setuptools.dynamic]
-version = {attr = "cf_rules.__version__"}
+version = { attr = "cf_rules.__version__" }

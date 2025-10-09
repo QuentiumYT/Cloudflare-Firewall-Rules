@@ -8,19 +8,19 @@ from .utils import Utils
 
 class DomainObject(dict):
     def __init__(self, *args, **kwargs):
-        super(DomainObject, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.__dict__ = self
 
 
 class RuleObject(dict):
     def __init__(self, *args, **kwargs):
-        super(RuleObject, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.__dict__ = self
 
 
 class RulesetObject(dict):
     def __init__(self, *args, **kwargs):
-        super(RulesetObject, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.__dict__ = self
 
 
@@ -39,6 +39,10 @@ class Cloudflare:
         self.plan = "free"
         self.max_rules = 5
         self.active_rules = 0
+
+        self._headers = {
+            "Content-Type": "application/json",
+        }
 
     def auth_key(self, email: str, key: str) -> dict:
         """Get your global API Key through cloudflare profile (API Keys section)
@@ -68,10 +72,13 @@ class Cloudflare:
         self._headers = {
             "X-Auth-Email": email,
             "X-Auth-Key": key,
-            "Content-Type": "application/json",
-        }
+        } | self._headers
 
-        r = requests.get("https://api.cloudflare.com/client/v4/user", headers=self._headers, timeout=5)
+        r = requests.get(
+            "https://api.cloudflare.com/client/v4/user",
+            headers=self._headers,
+            timeout=5,
+        )
 
         return r.json()
 
@@ -97,15 +104,19 @@ class Cloudflare:
             raise Error("You must provide a bearer token")
 
         self._headers = {
-            "Authorization": "Bearer " + bearer_token,
-            "Content-Type": "application/json",
-        }
+            "Authorization": f"Bearer {bearer_token}",
+        } | self._headers
 
-        r = requests.get("https://api.cloudflare.com/client/v4/user/tokens/verify", headers=self._headers, timeout=5)
+        r = requests.get(
+            "https://api.cloudflare.com/client/v4/user/tokens/verify",
+            headers=self._headers,
+            timeout=5,
+        )
 
         return r.json()
 
     def get_domains(self: str) -> dict:
+        # sourcery skip: reintroduce-else, swap-if-else-branches, use-named-expression
         """Get all domains
 
         :exception Error: If not authenticated (use :func:`auth_key(email, key) <auth_key>` or :func:`auth_token(bearer_token) <auth_token>`)
@@ -117,7 +128,11 @@ class Cloudflare:
         if not hasattr(self, "_headers"):
             raise Error("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer_token)")
 
-        r = requests.get("https://api.cloudflare.com/client/v4/zones", headers=self._headers, timeout=5)
+        r = requests.get(
+            "https://api.cloudflare.com/client/v4/zones",
+            headers=self._headers,
+            timeout=5,
+        )
 
         zones = self.error.handle(r.json(), ["result"])
 
@@ -164,7 +179,11 @@ class Cloudflare:
         if not hasattr(self, "_headers"):
             raise Error("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer_token)")
 
-        r = requests.get(f"https://api.cloudflare.com/client/v4/zones?name={domain_name}", headers=self._headers, timeout=5)
+        r = requests.get(
+            f"https://api.cloudflare.com/client/v4/zones?name={domain_name}",
+            headers=self._headers,
+            timeout=5,
+        )
 
         domain = self.error.handle(r.json(), ["result"])
 
@@ -210,7 +229,11 @@ class Cloudflare:
         zone = self.get_domain(domain_name)
         zone_id = zone["id"]
 
-        r = requests.get(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets", headers=self._headers, timeout=5)
+        r = requests.get(
+            f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets",
+            headers=self._headers,
+            timeout=5,
+        )
 
         rulesets = self.error.handle(r.json(), ["result"])
 
@@ -275,7 +298,11 @@ class Cloudflare:
         zone_id = ruleset["zone_id"]
         custom_ruleset_id = ruleset["id"]
 
-        r = requests.get(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}", headers=self._headers, timeout=5)
+        r = requests.get(
+            f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}",
+            headers=self._headers,
+            timeout=5,
+        )
 
         rules = self.error.handle(r.json(), ["result", "rules"])
 
@@ -399,7 +426,14 @@ class Cloudflare:
 
         return True
 
-    def create_rule(self, domain_name: str, rule_file: str, rule_name: str | None = None, action: str | None = None, position: int | None = None) -> bool:
+    def create_rule(
+        self,
+        domain_name: str,
+        rule_file: str,
+        rule_name: str | None = None,
+        action: str | None = None,
+        position: int | None = None,
+    ) -> bool:
         """Create a rule with a specific expression
 
         * action -> Please refer to https://developers.cloudflare.com/ruleset-engine/rules-language/actions/
@@ -422,7 +456,7 @@ class Cloudflare:
         """
 
         if not rule_name:
-            rule_name = rule_file.strip(".txt")
+            rule_name = rule_file.removesuffix(".txt")
 
         rules = self.get_rules(domain_name)
         zone_id = rules["zone_id"]
@@ -466,14 +500,28 @@ class Cloudflare:
             }
 
         if self.active_rules < self.max_rules:
-            r = requests.post(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}/rules", headers=self._headers, json=new_rule, timeout=5)
+            r = requests.post(
+                f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}/rules",
+                headers=self._headers,
+                json=new_rule,
+                timeout=5,
+            )
         else:
-            raise Error(f"Cannot create more rules ({self.active_rules} used / {self.max_rules} available)\n"
-                        "\t\t\tIf you have a better plan, please register the domain plan using cf.set_plan(\"<your-domain>\")")
+            raise Error(
+                f"Cannot create more rules ({self.active_rules} used / {self.max_rules} available)\n"
+                '\t\t\tIf you have a better plan, please register the domain plan using cf.set_plan("<your-domain>")'
+            )
 
         return self.error.handle(r.json(), ["success"])
 
-    def update_rule(self, domain_name: str, rule_file: str, rule_name: str | None = None, action: str | None = None, position: int | None = None) -> bool:
+    def update_rule(
+        self,
+        domain_name: str,
+        rule_file: str,
+        rule_name: str | None = None,
+        action: str | None = None,
+        position: int | None = None,
+    ) -> bool:
         """Update a rule with a specific expression
 
         :exception Error: Rule file is not found
@@ -490,7 +538,7 @@ class Cloudflare:
         """
 
         if not rule_name:
-            rule_name = rule_file.strip(".txt")
+            rule_name = rule_file.removesuffix(".txt")
 
         rule = self.get_rule(domain_name, rule_name=rule_name)
         zone_id = rule["zone_id"]
@@ -529,7 +577,12 @@ class Cloudflare:
 
         updated_rule["expression"] = expression
 
-        r = requests.patch(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}/rules/{rule_id}", headers=self._headers, json=updated_rule, timeout=5)
+        r = requests.patch(
+            f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}/rules/{rule_id}",
+            headers=self._headers,
+            json=updated_rule,
+            timeout=5,
+        )
 
         return self.error.handle(r.json(), ["success"])
 
@@ -545,7 +598,11 @@ class Cloudflare:
         custom_ruleset_id = rule["custom_ruleset_id"]
         rule_id = rule["id"]
 
-        r = requests.delete(f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}/rules/{rule_id}", headers=self._headers, timeout=5)
+        r = requests.delete(
+            f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets/{custom_ruleset_id}/rules/{rule_id}",
+            headers=self._headers,
+            timeout=5,
+        )
 
         return self.error.handle(r.json(), ["success"])
 
@@ -595,7 +652,7 @@ class Cloudflare:
             if file.endswith(".txt"):
                 print(f"Importing {file}...")
 
-                if file.strip(".txt") not in rules:
+                if file.removesuffix(".txt") not in rules:
                     if self.active_rules < self.max_rules:
                         if actions_all:
                             self.import_rule(domain_name, file, action=actions_all)
@@ -603,16 +660,18 @@ class Cloudflare:
                             self.import_rule(domain_name, file)
                         self.active_rules += 1
                     else:
-                        raise Error(f"Cannot create more rules ({self.active_rules} used / {self.max_rules} available)\n"
-                                    "\t\t\tIf you have a better plan, please register the domain plan using cf.set_plan(\"<your-domain>\")")
+                        raise Error(
+                            f"Cannot create more rules ({self.active_rules} used / {self.max_rules} available)\n"
+                            '\t\t\tIf you have a better plan, please register the domain plan using cf.set_plan("<your-domain>")'
+                        )
 
         return True
 
     import_rule = create_rule
     """Import a rule with a specific expression
-    
+
     Alias for :func:`create_rule`
-    
+
     >>> cf.import_rule("example.com", "Bad URL.txt", action="managed_challenge")
     # Import a rule with the expression in "Bad URL.txt", will use the action in the header if specified or force it using the action argument
     """
