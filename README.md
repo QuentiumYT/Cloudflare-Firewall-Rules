@@ -1,5 +1,13 @@
 <h1 align="center" style="font-size: 50px;">Welcome to Cloudflare WAF Custom rules library 👋</h1>
 
+<h3 align="center">
+<strong>
+<a href="https://quentiumyt.github.io/Cloudflare-Firewall-Rules/">Check documentation website</a>
+&middot;
+<a href="https://pypi.org/project/cf_rules/">View PyPI package</a>
+</strong>
+</h3>
+
 ### Previously known as Cloudflare Firewall Rules
 
 [![Website](https://quentium.fr/+img/github/website_cloudflare.svg)](https://quentiumyt.github.io/Cloudflare-Firewall-Rules/)&nbsp;
@@ -14,8 +22,6 @@
 This library is a wrapper that aims to easily create, modify, delete rules. It also provides a way to import & export new rules in your domain's firewall.
 
 If you have several rules that you want to duplicate among your domains, this module is made for you!
-
-### A complete documentation can be found at: https://quentiumyt.github.io/Cloudflare-Firewall-Rules/
 
 ## 📥 Installation
 
@@ -37,7 +43,7 @@ A Global API Key or a specific API Token generated from here: https://dash.cloud
 
 ### Cloudflare Global API Key
 
-![Cloudflare Key](/images/cloudflare_key.png)
+![Cloudflare Key](https://github.com/QuentiumYT/Cloudflare-Firewall-Rules/raw/HEAD/images/cloudflare_key.png)
 
 Using a Global API Key, you will have access to everything allowed by a Cloudflare account. It can access all domains from every account you have, this might be overpowered...
 
@@ -47,11 +53,11 @@ An API token is recommended to keep control of specific domains only. You will n
 
 The required permissions are "Zone.Zone, Zone.Firewall Services"
 
-![Cloudflare Token](/images/cloudflare_tokens.png)
+![Cloudflare Token](https://github.com/QuentiumYT/Cloudflare-Firewall-Rules/raw/HEAD/images/cloudflare_tokens.png)
 
 Here is a token creation example:
 
-![Cloudflare Token](/images/cloudflare_token.png)
+![Cloudflare Token](https://github.com/QuentiumYT/Cloudflare-Firewall-Rules/raw/HEAD/images/cloudflare_token.png)
 
 ## 💨 Quickstart
 
