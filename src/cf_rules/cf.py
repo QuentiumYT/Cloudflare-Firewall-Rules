@@ -125,7 +125,8 @@ class Cloudflare:
         >>> {"count": 2, "domains": ["example.com", "example.fr"], "result": [{"id": "a1b2c3", "name": "example.com", ...}, ...]}
         """
 
-        if not hasattr(self, "_headers"):
+        # Need either X-Auth-Key or Authorization header
+        if "X-Auth-Key" not in self._headers and "Authorization" not in self._headers:
             raise Error("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer_token)")
 
         r = requests.get(
@@ -176,7 +177,8 @@ class Cloudflare:
         >>> "example.fr"
         """
 
-        if not hasattr(self, "_headers"):
+        # Need either X-Auth-Key or Authorization header
+        if "X-Auth-Key" not in self._headers and "Authorization" not in self._headers:
             raise Error("You must authenticate first, use cf.auth_key(email, key) or cf.auth_token(bearer_token)")
 
         r = requests.get(
