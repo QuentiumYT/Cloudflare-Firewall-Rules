@@ -265,20 +265,22 @@ class Cloudflare:
         It should be the only ruleset with the source "firewall_custom" as per Cloudflare's documentation.
         This is the ruleset where all custom rules are stored.
 
-        :exception Error: If no custom ruleset is found
+        .. note::
+            If no custom ruleset is found, a default will be created automatically.
 
         >>> cf.get_custom_ruleset("example.com")
-        >>> {"id": "a1b2c3", "name": "default", "source": "firewall_custom", ...}
+        >>> {"id": "a1b2c3", "name": "default", "source": "firewall_custom", "phase": "http_request_firewall_custom", ...}
         """
 
         rulesets = self.get_rulesets(domain_name)
 
-        custom_ruleset = [x for x in rulesets["result"] if x.get("source") == "firewall_custom"]
+        custom_rulesets = [x for x in rulesets["result"] if x.get("source") == "firewall_custom"]
 
-        if not custom_ruleset:
-            raise Error("No custom ruleset found")
+        if not custom_rulesets:
+            self.create_custom_ruleset(domain_name)
+            return self.get_custom_ruleset(domain_name)
 
-        custom_ruleset = custom_ruleset[0]
+        custom_ruleset = custom_rulesets[0]
 
         if "error" in custom_ruleset:
             raise Error(custom_ruleset["error"])
@@ -286,6 +288,37 @@ class Cloudflare:
         custom_ruleset["zone_id"] = rulesets["zone_id"]
 
         return RulesetObject(custom_ruleset)
+
+    def create_custom_ruleset(self, domain_name: str) -> bool:
+        """Create a custom ruleset for a specific domain
+
+        :exception Error: If the custom ruleset already exists
+
+        >>> cf.create_custom_ruleset("example.com")
+        # Will create a new default custom ruleset if none exists
+        """
+
+        rulesets = self.get_rulesets(domain_name)
+        zone_id = rulesets["zone_id"]
+
+        if any(x for x in rulesets["result"] if x.get("source") == "firewall_custom"):
+            raise Error("Custom ruleset already exists")
+
+        new_ruleset = {
+            "name": "default",
+            "kind": "zone",
+            # "source": "firewall_custom",
+            "phase": "http_request_firewall_custom",
+        }
+
+        r = requests.post(
+            f"https://api.cloudflare.com/client/v4/zones/{zone_id}/rulesets",
+            headers=self._headers,
+            json=new_ruleset,
+            timeout=5,
+        )
+
+        return self.error.handle(r.json(), ["success"])
 
     def get_rules(self, domain_name: str) -> dict:
         """Get all rules from a specific domain

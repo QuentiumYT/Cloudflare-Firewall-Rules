@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+- Add `create_custom_ruleset` method to create a new default custom ruleset
 - Newer pyproject with Python >= 3.11 (matching sphinx requirement)
 - Setup UV to take over environment
 - Cleaner code & format with Ruff + fix removed sphinx display_version
+- Improve documentation quick links & Custom rules location screenshot
 
 ## [2.1.0] - Misc bugs & rule position (2025-03-27)
 
