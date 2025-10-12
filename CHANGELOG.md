@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [2.0.0] - Complete rewrite for new WAF API (2024-01-26)
 
-> ### Renamed the project to Cloudflare WAF custom rules since the API changed and will be removed on may 2024
+> ### Renamed the name of the project to Cloudflare WAF Custom rules since the API changed and will be removed on may 2024
 
 ### Added
 

@@ -19,9 +19,15 @@
 
 > #### A Cloudflare wrapper to bulk add / edit your WAF custom rules using Cloudflare's API.
 
-This library is a wrapper that aims to easily create, modify, delete rules. It also provides a way to import & export new rules in your domain's firewall.
+This library is a wrapper that aims to easily create, modify, delete security rules. It also provides a way to import & export new rules in your domain's firewall.
 
-If you have several rules that you want to duplicate among your domains, this module is made for you!
+If you have several rules that you want to duplicate among your domains, this package is made for you!
+
+Cloudflare's Security Rules are available in a domain in the  **Security > Security Rules** tab, by default, you have a free plan with 5 custom rules available.
+
+The official documentation is available here: https://developers.cloudflare.com/waf/custom-rules/
+
+![Domain Security Rules](https://github.com/QuentiumYT/Cloudflare-Firewall-Rules/raw/HEAD/images/domain_security_rules.png)
 
 ## 📥 Installation
 
