@@ -1,0 +1,9 @@
+.document input[type=text] {
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin-bottom: 20px;
+    border-color: #2472a4;
+}
