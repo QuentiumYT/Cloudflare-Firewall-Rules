@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-- Nothing yet!
+- Better typing for methods & classes
+- Format files with Ruff
 
 ## [2.2.0] - Project maintenance & create custom ruleset (2025-10-12)
 

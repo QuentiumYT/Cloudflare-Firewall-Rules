@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 
 import dotenv
+
 from cf_rules import Cloudflare
 
 dotenv.load_dotenv(".env")
@@ -26,8 +27,7 @@ print(f"There are {len(rules)} rules available for your account:")
 print(" ".join([x.description for x in rules]))
 
 
-
 for rule in rules:
     print(f"{rule['description']} is {'active' if rule['enabled'] else 'inactive'}")
-    updated = datetime.fromisoformat(rule['last_updated'].replace("Z", ""))
+    updated = datetime.fromisoformat(rule["last_updated"].replace("Z", ""))
     print("Created on " + updated.strftime("%Y-%m-%d %H:%M:%S"))

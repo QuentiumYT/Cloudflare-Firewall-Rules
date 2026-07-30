@@ -1,5 +1,5 @@
 class Error(Exception):
-    def __init__(self, message: str | None = None) -> "Error":
+    def __init__(self, message: str | None = None) -> None:
         """Error class to handle Cloudflare errors
 
         >>> error = Error()
@@ -23,7 +23,7 @@ class Error(Exception):
         """
 
         if hasattr(self, "message"):
-            return self.message.get("error")
+            return str(self.message.get("error"))
 
         return "Unknown error"
 
@@ -36,7 +36,7 @@ class Error(Exception):
     def __getitem__(self, key):
         return self.message.get(key)
 
-    def handle(self, request_json: dict, keys: list[str | int]) -> any:
+    def handle(self, request_json: dict, keys: list[str | int]) -> any:  # ty: ignore[invalid-type-form]
         """Handle errors from a request response
 
         :exception Error: If auth error
@@ -59,7 +59,7 @@ class Error(Exception):
 
         if request_json.get("errors"):
             messages = []
-            for error in request_json.get("errors"):
+            for error in request_json.get("errors") or []:
                 main_msg = error.get("message")
                 if error.get("error_chain"):
                     messages.extend(

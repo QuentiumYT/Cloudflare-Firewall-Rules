@@ -50,3 +50,34 @@ docs = [
 
 [tool.setuptools.dynamic]
 version = { attr = "cf_rules.__version__" }
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+  # flake8-bugbear
+  "B",
+  # flake8-comprehensions
+  "C4",
+  # pycodestyle errors
+  "E",
+  # pyflakes
+  "F",
+  # flake8-logging-format
+  "G",
+  # isort
+  "I",
+  # flake8-implicit-str-concat
+  "ISC",
+  # pylint convention
+  "PLC",
+  # pylint errors
+  "PLE",
+  # flake8-simplify
+  "SIM",
+  # pyupgrade
+  "UP",
+  # pycodestyle warnings
+  "W",
+]

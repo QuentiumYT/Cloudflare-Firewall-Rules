@@ -1,6 +1,7 @@
 import os
 
 import dotenv
+
 from cf_rules import Cloudflare, Utils
 
 utils = Utils()
@@ -9,7 +10,6 @@ utils.write_expression("Path.txt", """(http.request.uri.path eq "/test")""")
 u = utils.read_expression("Bad Bots.txt")
 
 print(u)
-
 
 
 dotenv.load_dotenv(".env")

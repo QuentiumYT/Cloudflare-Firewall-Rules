@@ -1,6 +1,7 @@
 import os
 
 import dotenv
+
 from cf_rules import Cloudflare
 
 dotenv.load_dotenv(".env")
@@ -12,7 +13,8 @@ remote_rule_name = "Handle Bad Bots"
 cf = Cloudflare("expressions")
 cf.auth_key(os.environ.get("EMAIL"), os.environ.get("KEY"))
 
-domains = cf.domains # List of domains as objects
+# List of domains as objects
+domains = cf.domains
 
 # Update your rule for all domains
 for domain in domains:

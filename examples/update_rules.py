@@ -1,6 +1,7 @@
 import os
 
 import dotenv
+
 from cf_rules import Cloudflare
 
 dotenv.load_dotenv(".env")

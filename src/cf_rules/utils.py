@@ -2,7 +2,7 @@ import os
 
 
 class Utils:
-    def __init__(self, directory: str = None) -> None:
+    def __init__(self, directory: str | None = None) -> None:
         """Utils class to manage Cloudflare data
 
         >>> utils = Utils("my_expressions")
@@ -79,11 +79,11 @@ class Utils:
                 file.write(f"#! {data} !#\n")
             file.write(rule_expression)
 
-    def read_expression(self, rule_file: str) -> tuple[str, str]:
+    def read_expression(self, rule_file: str) -> tuple[dict | None, str]:
         """Read an expression from a file
 
         >>> utils.read_expression("IsBot")
-        >>> "(cf.client.bot)"
+        >>> ({"action": "managed_challenge", "enabled": "True"}, "(cf.client.bot)")
         """
 
         if not rule_file.endswith(".txt"):
@@ -130,7 +130,7 @@ class Utils:
                     print("The action in the header is not valid, ignoring it...")
                     print("List of available actions: " + ", ".join(available_actions))
             if "enabled" in header:
-                header["enabled"] = header["enabled"].lower() == "true"
+                header["enabled"] = str(header["enabled"].lower() == "true")
         else:
             header = None
 

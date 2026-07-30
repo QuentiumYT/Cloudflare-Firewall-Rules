@@ -25,7 +25,7 @@ class RulesetObject(dict):
 
 
 class Cloudflare:
-    def __init__(self, folder: str | None = None):
+    def __init__(self, folder: str | None = None) -> None:
         """Initialize Cloudflare class
 
         Specify a folder argument where expressions will be saved
@@ -115,7 +115,7 @@ class Cloudflare:
 
         return r.json()
 
-    def get_domains(self: str) -> dict:
+    def get_domains(self) -> dict:
         # sourcery skip: reintroduce-else, swap-if-else-branches, use-named-expression
         """Get all domains
 
@@ -304,7 +304,7 @@ class Cloudflare:
         if any(x for x in rulesets["result"] if x.get("source") == "firewall_custom"):
             raise Error("Custom ruleset already exists")
 
-        new_ruleset = {
+        new_ruleset: dict = {
             "name": "default",
             "kind": "zone",
             # "source": "firewall_custom",
@@ -403,7 +403,7 @@ class Cloudflare:
 
         return RuleObject(rule)
 
-    def export_rules(self, domain_name: str) -> True:
+    def export_rules(self, domain_name: str) -> bool:
         """Export all expressions from a specific domain
 
         .. note::
@@ -430,7 +430,7 @@ class Cloudflare:
 
         return True
 
-    def export_rule(self, domain_name: str, *, rule_name: str | None = None, rule_id: str | None = None) -> True:
+    def export_rule(self, domain_name: str, *, rule_name: str | None = None, rule_id: str | None = None) -> bool:
         """Export the expression of a rule in a txt file
 
         :exception Error: Rule name or rule ID is not provided
@@ -457,7 +457,7 @@ class Cloudflare:
 
         rule_expression = self.utils.beautify(rule["expression"])
 
-        self.utils.write_expression(rule_name, rule_expression, header=header)
+        self.utils.write_expression(rule_name or rule["description"], rule_expression, header=header)
 
         return True
 
@@ -505,7 +505,7 @@ class Cloudflare:
         if rule_name in rules["rules"]:
             raise Error(f"Rule '{rule_name}' already exists")
 
-        new_rule = {
+        new_rule: dict = {
             "description": rule_name,
             "expression": expression,
         }
