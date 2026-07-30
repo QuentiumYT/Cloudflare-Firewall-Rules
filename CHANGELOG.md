@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [2.2.1] - Project maintenance & better typing (2026-07-30)
+
 - Better typing for methods & classes
 - Format files with Ruff
 - Bump dependencies & require Python 3.12 for sphinx
