@@ -6,7 +6,7 @@ __version__ = "2.2.0"
 __author__ = "Quentin Lienhardt"
 __author_email__ = "pro@quentium.fr"
 __license__ = "Apache-2.0"
-__copyright__ = "Copyright 2025 Quentin Lienhardt"
+__copyright__ = "Copyright 2026 Quentin Lienhardt"
 
 __all__ = (
     "Cloudflare",
